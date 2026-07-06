@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Fazlan Fairooz · IT & Operations</title>
+    <meta name="description" content="Fazlan Fairooz — IT & Business Operations professional. ERP migration, master data governance, Q-commerce operations, API integration." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #060b14;
+            --bg-alt: #0a1424;
+            --glass: rgba(18, 28, 46, 0.55);
+            --glass-strong: rgba(18, 28, 46, 0.78);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 229, 255, 0.35);
+            --text: #eef3f8;
+            --text-dim: #8fa2b8;
+            --text-dimmer: #526078;
+            --cyan: #00e5ff;
+            --violet: #a855f7;
+            --magenta: #ff2e93;
+            --amber: #ffb020;
+            --radius: 14px;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            height: 100%;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ----- background layers ----- */
+        #netbg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            display: block;
+        }
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                radial-gradient(1400px 700px at 15% -5%, rgba(0, 229, 255, 0.06), transparent 55%),
+                radial-gradient(1200px 700px at 90% 10%, rgba(168, 85, 247, 0.07), transparent 55%),
+                radial-gradient(900px 600px at 50% 100%, rgba(255, 46, 147, 0.05), transparent 55%);
+        }
+        #cursor-glow {
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.10), rgba(168, 85, 247, 0.06) 45%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+            mix-blend-mode: screen;
+            will-change: transform;
+        }
+        @media (pointer: coarse) {
+            #cursor-glow {
+                display: none;
+            }
+        }
+
+        /* ----- nav bar ----- */
+        .statusbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(6, 11, 20, 0.7);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .statusbar-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-dim);
+            letter-spacing: 0.02em;
+            font-size: 12.5px;
+            white-space: nowrap;
+        }
+        .status-left .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(0, 229, 255, 0.6);
+            animation: pulse 2.2s infinite;
+            flex-shrink: 0;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(0, 229, 255, 0.45);
+            }
+            70% {
+                box-shadow: 0 0 10px var(--cyan), 0 0 0 9px rgba(0, 229, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(0, 229, 255, 0);
+            }
+        }
+        .status-left i {
+            color: var(--cyan);
+            margin-right: 4px;
+        }
+        .statusbar nav {
+            display: none;
+            gap: 6px;
+        }
+        @media (min-width: 720px) {
+            .statusbar nav {
+                display: flex;
+            }
+        }
+        .statusbar nav a {
+            color: var(--text-dim);
+            font-size: 12.5px;
+            letter-spacing: 0.03em;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: color 0.2s, background 0.2s;
+            font-weight: 500;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .statusbar nav a i {
+            font-size: 12px;
+        }
+        .statusbar nav a:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .statusbar nav a.active {
+            color: var(--cyan);
+        }
+        .statusbar nav a.active::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 2px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--violet));
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--cyan);
+        }
+
+        /* ----- hero console with split layout ----- */
+        .hero {
+            padding: 60px 0 40px;
+        }
+        .console {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .console::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: var(--radius);
+            background: linear-gradient(120deg, rgba(0, 229, 255, 0.5), rgba(168, 85, 247, 0.25), rgba(255, 46, 147, 0.35));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .console-left {
+            padding: 28px 28px 34px 32px;
+            border-right: 1px solid var(--border-glass);
+        }
+        .console-right {
+            padding: 28px 28px 34px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 480px;
+        }
+
+        /* ----- AI illusion art ----- */
+        .ai-art {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ai-art canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            display: block;
+        }
+
+        /* fallback gradient art if canvas fails */
+        .ai-art-fallback {
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(0, 229, 255, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.20) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(255, 46, 147, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(255, 176, 32, 0.08) 0%, transparent 40%),
+                linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(168, 85, 247, 0.08));
+            background-blend-mode: screen;
+            animation: ambientGlow 8s ease-in-out infinite alternate;
+        }
+        @keyframes ambientGlow {
+            0% {
+                background:
+                    radial-gradient(circle at 30% 40%, rgba(0, 229, 255, 0.15) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.20) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 80%, rgba(255, 46, 147, 0.12) 0%, transparent 50%),
+                    radial-gradient(circle at 20% 80%, rgba(255, 176, 32, 0.08) 0%, transparent 40%);
+            }
+            50% {
+                background:
+                    radial-gradient(circle at 60% 30%, rgba(0, 229, 255, 0.20) 0%, transparent 55%),
+                    radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.25) 0%, transparent 45%),
+                    radial-gradient(circle at 70% 80%, rgba(255, 46, 147, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 20%, rgba(255, 176, 32, 0.10) 0%, transparent 40%);
+            }
+            100% {
+                background:
+                    radial-gradient(circle at 40% 50%, rgba(0, 229, 255, 0.18) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 70%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),
+                    radial-gradient(circle at 30% 30%, rgba(255, 46, 147, 0.14) 0%, transparent 45%),
+                    radial-gradient(circle at 70% 40%, rgba(255, 176, 32, 0.09) 0%, transparent 45%);
+            }
+        }
+
+        /* floating tech orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: floatOrb 12s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.3), rgba(0, 229, 255, 0.05));
+            top: 15%;
+            right: 20%;
+            animation-delay: 0s;
+        }
+        .orb-2 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.35), rgba(168, 85, 247, 0.05));
+            bottom: 25%;
+            left: 15%;
+            animation-delay: 2s;
+            animation-duration: 14s;
+        }
+        .orb-3 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255, 46, 147, 0.3), rgba(255, 46, 147, 0.05));
+            top: 55%;
+            right: 10%;
+            animation-delay: 4s;
+            animation-duration: 10s;
+        }
+        .orb-4 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 176, 32, 0.2), rgba(255, 176, 32, 0.03));
+            bottom: 10%;
+            right: 30%;
+            animation-delay: 1s;
+            animation-duration: 16s;
+        }
+        .orb-5 {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.25), rgba(0, 229, 255, 0.02));
+            top: 25%;
+            left: 10%;
+            animation-delay: 3s;
+            animation-duration: 11s;
+        }
+
+        @keyframes floatOrb {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.6;
+            }
+            25% {
+                transform: translate(30px, -40px) scale(1.1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translate(-20px, 30px) scale(0.9);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translate(40px, 20px) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        /* tech grid lines */
+        .tech-grid {
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            background-image:
+                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            animation: gridPulse 6s ease-in-out infinite alternate;
+        }
+        @keyframes gridPulse {
+            0% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        /* console bar spans full width */
+        .console-bar {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-glass);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dimmer);
+        }
+        .console-bar .chip {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--text-dimmer);
+            opacity: 0.5;
+        }
+
+        .boot-line {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-dimmer);
+            margin-bottom: 4px;
+            opacity: 0;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .boot-line span.ok {
+            color: var(--cyan);
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+        }
+        .boot-line:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .boot-line:nth-child(2) {
+            animation-delay: 0.35s;
+        }
+        .boot-line:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            letter-spacing: -0.01em;
+            margin-top: 18px;
+            background: linear-gradient(90deg, #ffffff 0%, var(--cyan) 35%, var(--violet) 65%, var(--magenta) 100%);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeIn 0.5s ease forwards, sheen 6s linear infinite;
+            animation-delay: 0.85s, 1.4s;
+            opacity: 0;
+        }
+        @keyframes sheen {
+            to {
+                background-position: 250% center;
+            }
+        }
+
+        .hero .role-line {
+            margin-top: 12px;
+            font-family: var(--font-mono);
+            font-size: 16px;
+            color: var(--cyan);
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+            min-height: 22px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 1.05s;
+        }
+        .role-line .cursor {
+            display: inline-block;
+            width: 8px;
+            background: var(--cyan);
+            margin-left: 2px;
+            animation: blink 1s steps(1) infinite;
+            box-shadow: 0 0 8px var(--cyan);
+        }
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hero p.summary {
+            margin-top: 16px;
+            max-width: 100%;
+            color: var(--text-dim);
+            font-size: 14.5px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 1.2s;
+            line-height: 1.8;
+        }
+        .hero p.summary i {
+            color: var(--cyan);
+            margin-right: 6px;
+        }
+
+        .hero-actions {
+            margin-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 1.35s;
+        }
+        .btn {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            letter-spacing: 0.02em;
+            padding: 11px 20px;
+            border-radius: 9px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, var(--cyan), var(--violet));
+            color: #04121a;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 0 0 rgba(0, 229, 255, 0);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 8px 30px -6px rgba(0, 229, 255, 0.55);
+            transform: translateY(-2px);
+        }
+        .btn-ghost {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .btn-ghost:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            box-shadow: 0 0 18px -4px rgba(0, 229, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .meta-tags {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+            animation-delay: 1.5s;
+        }
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dimmer);
+            border: 1px solid var(--border-glass);
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tag i {
+            color: var(--cyan);
+            font-size: 10px;
+        }
+
+        /* ----- responsive hero split ----- */
+        @media (max-width: 1024px) {
+            .console {
+                grid-template-columns: 1fr;
+            }
+            .console-left {
+                border-right: none;
+                border-bottom: 1px solid var(--border-glass);
+                padding: 28px 24px 24px;
+            }
+            .console-right {
+                padding: 20px 24px 28px;
+                min-height: 300px;
+            }
+            .ai-art {
+                min-height: 280px;
+            }
+            .ai-art canvas {
+                min-height: 260px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrap {
+                padding: 0 16px;
+            }
+            .statusbar-inner {
+                padding: 0 16px;
+            }
+            .console-left {
+                padding: 20px 16px 18px;
+            }
+            .console-right {
+                padding: 16px 16px 24px;
+                min-height: 220px;
+            }
+            .ai-art {
+                min-height: 200px;
+            }
+            .ai-art canvas {
+                min-height: 180px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p.summary {
+                font-size: 13px;
+            }
+            .status-left span:not(.dot) {
+                font-size: 10px;
+            }
+            .status-left .dot {
+                width: 6px;
+                height: 6px;
+            }
+            .orb-1,
+            .orb-4 {
+                display: none;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 719px) {
+            .wrap {
+                padding: 0 24px;
+            }
+            .statusbar-inner {
+                padding: 0 24px;
+            }
+            .console-left {
+                padding: 24px 20px 22px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* ----- rest of sections (unchanged layout) ----- */
+        section {
+            padding: 60px 0;
+        }
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+        .section-head .idx {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--cyan);
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .section-head .idx i {
+            font-size: 14px;
+        }
+        .section-head h2 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        .section-head .rule {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-glass), transparent);
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        @media (min-width: 640px) {
+            .kpi-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .kpi-card {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 22px 22px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.25s, transform 0.1s, box-shadow 0.25s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .kpi-card .kpi-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block;
+            color: var(--accent, var(--cyan));
+        }
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent, var(--cyan)), transparent);
+        }
+        .kpi-card:hover {
+            border-color: var(--accent, var(--border-glow));
+            box-shadow: 0 20px 50px -20px var(--accent-shadow, rgba(0, 229, 255, 0.35));
+        }
+        .kpi-card .label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-dimmer);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .kpi-card .value {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent, var(--cyan));
+            margin-top: 6px;
+            text-shadow: 0 0 22px var(--accent-shadow, rgba(0, 229, 255, 0.35));
+        }
+        .kpi-card .desc {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+        .kpi-card .bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 2px;
+            margin-top: 14px;
+            overflow: hidden;
+        }
+        .kpi-card .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent, var(--cyan)), var(--magenta));
+            width: 0%;
+            transition: width 1.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+        }
+        .kpi-card .bar-fill::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            width: 40%;
+            animation: shimmer 2.2s infinite;
+            animation-delay: 1.4s;
+        }
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-120%);
+            }
+            100% {
+                transform: translateX(280%);
+            }
+        }
+
+        .log {
+            position: relative;
+            padding-left: 32px;
+            border-left: 1px solid var(--border-glass);
+        }
+        .log::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, var(--cyan), var(--violet) 50%, transparent);
+            opacity: 0.6;
+        }
+        .log-entry {
+            position: relative;
+            margin-bottom: 36px;
+        }
+        .log-entry:last-child {
+            margin-bottom: 0;
+        }
+        .log-entry::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+        .log-entry.current::before {
+            background: var(--cyan);
+            box-shadow: 0 0 16px var(--cyan);
+        }
+        .log-card {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 22px 26px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+        }
+        .log-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 60px -30px rgba(0, 229, 255, 0.35);
+            transform: translateY(-2px);
+        }
+        .log-meta {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dimmer);
+            letter-spacing: 0.03em;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .log-meta .badge {
+            color: var(--bg);
+            background: linear-gradient(90deg, var(--cyan), var(--violet));
+            border-radius: 5px;
+            padding: 2px 10px;
+            font-size: 10.5px;
+            font-weight: 700;
+        }
+        .log-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .log-card h3 i {
+            color: var(--cyan);
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        .log-card .company {
+            color: var(--text-dim);
+            font-size: 14px;
+            margin-top: 2px;
+        }
+        .log-card .company i {
+            margin-right: 6px;
+            color: var(--text-dimmer);
+        }
+        .log-card ul {
+            margin-top: 14px;
+            padding-left: 0;
+            color: var(--text-dim);
+            font-size: 14.5px;
+        }
+        .log-card li {
+            margin-bottom: 7px;
+            list-style: none;
+            position: relative;
+            padding-left: 20px;
+        }
+        .log-card li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--magenta);
+        }
+
+        .skill-groups {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 720px) {
+            .skill-groups {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .skill-group {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 22px 24px 22px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .skill-group:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 50px -30px rgba(168, 85, 247, 0.35);
+        }
+        .skill-group h4 {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--amber);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .skill-group h4 i {
+            margin-right: 8px;
+        }
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .chip {
+            font-size: 12.5px;
+            padding: 6px 14px;
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            color: var(--text);
+            transition: border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chip i {
+            font-size: 11px;
+            color: var(--cyan);
+        }
+        .chip:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px -6px rgba(0, 229, 255, 0.4);
+        }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+        @media (min-width: 720px) {
+            .split-grid {
+                grid-template-columns: 1.4fr 1fr;
+            }
+        }
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 24px 26px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 50px -30px rgba(0, 229, 255, 0.3);
+        }
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .edu-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .edu-item:first-child {
+            padding-top: 0;
+        }
+        .edu-item .name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .edu-item .name i {
+            color: var(--cyan);
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        .edu-item .school {
+            color: var(--text-dim);
+            font-size: 13.5px;
+            margin-top: 2px;
+        }
+        .edu-item .when {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dimmer);
+            white-space: nowrap;
+            text-align: right;
+        }
+        .lang-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-glass);
+            font-size: 14.5px;
+        }
+        .lang-row:last-child {
+            border-bottom: none;
+        }
+        .lang-row i {
+            color: var(--cyan);
+            margin-right: 10px;
+            width: 18px;
+        }
+        .lang-level {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--cyan);
+            border: 1px solid var(--border-glow);
+            border-radius: 5px;
+            padding: 2px 10px;
+            text-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
+        }
+
+        .rec-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 640px) {
+            .rec-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .rec-card {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 22px 26px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .rec-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 50px -30px rgba(168, 85, 247, 0.3);
+        }
+        .rec-card .rec-author {
+            font-weight: 600;
+            color: var(--cyan);
+            font-size: 14.5px;
+            margin-bottom: 4px;
+        }
+        .rec-card .rec-author i {
+            margin-right: 6px;
+        }
+        .rec-card .rec-title {
+            font-size: 12px;
+            color: var(--text-dimmer);
+            margin-bottom: 12px;
+            font-family: var(--font-mono);
+        }
+        .rec-card .rec-text {
+            color: var(--text-dim);
+            font-size: 14.5px;
+            line-height: 1.8;
+        }
+        .rec-card .rec-text::before {
+            content: '"';
+            color: var(--violet);
+            font-size: 1.4rem;
+            margin-right: 4px;
+        }
+        .rec-card .rec-text::after {
+            content: '"';
+            color: var(--violet);
+            font-size: 1.4rem;
+            margin-left: 4px;
+        }
+
+        .proj-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .proj-card {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 22px 26px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .proj-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 50px -30px rgba(0, 229, 255, 0.3);
+        }
+        .proj-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--cyan);
+        }
+        .proj-card h3 i {
+            margin-right: 8px;
+        }
+        .proj-card .proj-sub {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dimmer);
+            margin-top: 2px;
+        }
+        .proj-card ul {
+            margin-top: 12px;
+            padding-left: 0;
+            color: var(--text-dim);
+            font-size: 14.5px;
+        }
+        .proj-card li {
+            margin-bottom: 6px;
+            list-style: none;
+            padding-left: 20px;
+            position: relative;
+        }
+        .proj-card li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--amber);
+            font-size: 10px;
+            top: 2px;
+        }
+
+        .honor-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+        @media (min-width: 640px) {
+            .honor-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .honor-item {
+            background: var(--glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 16px 22px;
+            backdrop-filter: blur(8px);
+            transition: border-color 0.25s;
+        }
+        .honor-item:hover {
+            border-color: var(--border-glow);
+        }
+        .honor-item .h-title {
+            font-weight: 600;
+            font-size: 14.5px;
+        }
+        .honor-item .h-title i {
+            margin-right: 8px;
+        }
+        .honor-item .h-meta {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .contact-card {
+            background: var(--glass-strong);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 48px 36px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(16px);
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: var(--radius);
+            background: linear-gradient(120deg, var(--cyan), var(--violet), var(--magenta));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+        }
+        .contact-card h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .contact-card h2 i {
+            color: var(--cyan);
+            margin-right: 10px;
+        }
+        .contact-card p {
+            color: var(--text-dim);
+            max-width: 550px;
+            margin: 0 auto 24px;
+            font-size: 15px;
+        }
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        footer {
+            padding: 32px 0 48px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-dimmer);
+        }
+        footer i {
+            color: var(--magenta);
+            margin: 0 4px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .full-fade {
+            animation: fullFade 0.7s ease forwards;
+        }
+        @keyframes fullFade {
+            0% {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .wrap {
+                max-width: 2000px;
+                padding: 0 80px;
+            }
+            .statusbar-inner {
+                max-width: 2000px;
+                padding: 0 80px;
+            }
+            .hero h1 {
+                font-size: 4.2rem;
+            }
+            .hero p.summary {
+                font-size: 17px;
+            }
+            .kpi-card .value {
+                font-size: 2.6rem;
+            }
+            .section-head h2 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="netbg"></canvas>
+    <div class="grain-overlay"></div>
+    <div id="cursor-glow"></div>
+
+    <!-- NAV -->
+    <div class="statusbar">
+        <div class="statusbar-inner">
+            <div class="status-left">
+                <span class="dot"></span>
+                <span><i class="fas fa-terminal"></i>FAZLAN_FAIROOZ &nbsp;·&nbsp; OPEN_TO_WORK</span>
+            </div>
+            <nav id="mainNav">
+                <a href="#metrics" data-target="metrics"><i class="fas fa-chart-simple"></i> Overview</a>
+                <a href="#experience" data-target="experience"><i class="fas fa-briefcase"></i> Experience</a>
+                <a href="#projects" data-target="projects"><i class="fas fa-code"></i> Projects</a>
+                <a href="#skills" data-target="skills"><i class="fas fa-cogs"></i> Skills</a>
+                <a href="#recommendations" data-target="recommendations"><i class="fas fa-quote-left"></i> Recommendations</a>
+                <a href="#education" data-target="education"><i class="fas fa-graduation-cap"></i> Education</a>
+                <a href="#contact" data-target="contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- HERO with Split Layout -->
+    <div class="wrap hero">
+        <div class="console full-fade">
+            <div class="console-bar">
+                <span class="chip"></span><span class="chip"></span><span class="chip"></span>
+                <span style="margin-left:8px;"><i class="fas fa-cog fa-spin" style="margin-right:6px;"></i>~/profile — system boot</span>
+            </div>
+
+            <!-- Left Column: Content -->
+            <div class="console-left">
+                <div class="boot-line">$ initializing profile<span class="ok">... OK</span></div>
+                <div class="boot-line">$ loading 5+ years of retail IT &amp; operations data<span class="ok">... OK</span></div>
+                <div class="boot-line">$ status: <span class="ok">READY</span></div>
+
+                <h1>Fazlan Fairooz</h1>
+                <div class="role-line" id="roleLine"></div>
+
+                <p class="summary">
+                    <i class="fas fa-rocket"></i> I specialize in managing and optimizing enterprise systems to ensure accurate master data governance and smooth business operations. In my current role at Celeste Daily, I focus on improving ERP workflows, streamlining operational processes, and enhancing system efficiency across retail and digital platforms. My responsibilities include supporting system migrations, designing and mapping business processes, and conducting end-user training to ensure effective system adoption. I actively work with platforms such as Odoo and various POS systems, while also enabling API integrations that ensure real-time data synchronization between in-store and online operations.
+                    <br><br>
+                    <i class="fas fa-graduation-cap"></i> Alongside my professional role, I am currently pursuing a Pearson BTEC Level 5 Higher National Diploma in Computing and progressing toward a Bachelor of Science (Hons) in Computing with London Metropolitan University (UK), further strengthening my technical expertise and academic foundation in the field. I am committed to building reliable, scalable, and efficient systems that support data-driven decision-making, operational continuity, and continuous process improvement.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="mailto:fazlanfairooz20@gmail.com"><i class="fas fa-paper-plane"></i> Email Me</a>
+                    <a class="btn btn-ghost" href="https://linkedin.com/in/fazlanfairooz" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a class="btn btn-ghost" href="tel:+94760670476"><i class="fas fa-phone"></i> +94 76 067 0476</a>
+                </div>
+
+                <div class="meta-tags">
+                    <span class="tag"><i class="fas fa-map-pin"></i> Colombo, Sri Lanka</span>
+                    <span class="tag"><i class="fas fa-globe"></i> Open to relocation &amp; sponsorship</span>
+                    <span class="tag"><i class="fas fa-laptop"></i> Remote / split-shift friendly</span>
+                </div>
+            </div>
+
+            <!-- Right Column: AI Illusion Art -->
+            <div class="console-right">
+                <div class="ai-art">
+                    <!-- Fallback gradient art -->
+                    <div class="ai-art-fallback"></div>
+                    <!-- Tech grid overlay -->
+                    <div class="tech-grid"></div>
+                    <!-- Floating orbs -->
+                    <div class="orb orb-1"></div>
+                    <div class="orb orb-2"></div>
+                    <div class="orb orb-3"></div>
+                    <div class="orb orb-4"></div>
+                    <div class="orb orb-5"></div>
+                    <!-- Canvas for dynamic illusion -->
+                    <canvas id="aiCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="wrap" id="metrics">
+        <section>
+            <div class="section-head">
+                <span class="idx"><i class="fas fa-gauge-high"></i> 01</span><h2>Live Metrics</h2><span class="rule"></span>
+            </div>
+            <div class="kpi-grid">
+                <div class="kpi-card reveal tilt" style="--accent:#00e5ff; --accent-shadow:rgba(0,229,255,0.35)">
+                    <span class="kpi-icon"><i class="fas fa-server"></i></span>
+                    <div class="label">System Uptime</div>
+                    <div class="value" data-target="99.9" data-suffix="%">0%</div>
+                    <div class="desc">Across 10+ retail outlets &amp; online platforms</div>
+                    <div class="bar"><div class="bar-fill" data-fill="99.9"></div></div>
+                </div>
+                <div class="kpi-card reveal tilt" style="--accent:#a855f7; --accent-shadow:rgba(168,85,247,0.35)">
+                    <span class="kpi-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+                    <div class="label">ERP Migration</div>
+                    <div class="value" data-target="40" data-suffix="%">0%</div>
+                    <div class="desc">Less downtime than planned, 100% user adoption</div>
+                    <div class="bar"><div class="bar-fill" data-fill="40"></div></div>
+                </div>
+                <div class="kpi-card reveal tilt" style="--accent:#ff2e93; --accent-shadow:rgba(255,46,147,0.35)">
+                    <span class="kpi-icon"><i class="fas fa-arrows-spin"></i></span>
+                    <div class="label">Reconciliation Time</div>
+                    <div class="value" data-target="50" data-suffix="%">0%</div>
+                    <div class="desc">Reduced via Uber Eats, PickMe, myPOS, Odoo APIs</div>
+                    <div class="bar"><div class="bar-fill" data-fill="50"></div></div>
+                </div>
+                <div class="kpi-card reveal tilt" style="--accent:#ffb020; --accent-shadow:rgba(255,176,32,0.35)">
+                    <span class="kpi-icon"><i class="fas fa-bolt"></i></span>
+                    <div class="label">Priority Issue Resolution</div>
+                    <div class="value" data-target="95" data-suffix="%">0%</div>
+                    <div class="desc">Resolved within 1–2 hours</div>
+                    <div class="bar"><div class="bar-fill" data-fill="95"></div></div>
+                </div>
+                <div class="kpi-card reveal tilt" style="--accent:#00e5ff; --accent-shadow:rgba(0,229,255,0.35)">
+                    <span class="kpi-icon"><i class="fas fa-coins"></i></span>
+                    <div class="label">Rollout Budget</div>
+                    <div class="value" data-target="10" data-suffix="%">0%</div>
+                    <div class="desc">Under budget across 5+ outlet IT rollouts</div>
+                    <div class="bar"><div class="bar-fill" data-fill="10"></div></div>
+                </div>
+                <div class="kpi-card reveal tilt" style="--accent:#a855f7; --accent-shadow:rgba(168,85,247,0.35)">
+                    <span class="kpi-icon"><i class="fas fa-bullseye"></i></span>
+                    <div class="label">Data Accuracy</div>
+                    <div class="value" data-target="30" data-suffix="%">0%</div>
+                    <div class="desc">Improvement via master data governance framework</div>
+                    <div class="bar"><div class="bar-fill" data-fill="30"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience">
+            <div class="section-head">
+                <span class="idx"><i class="fas fa-timeline"></i> 02</span><h2>Deployment Log — Experience</h2><span class="rule"></span>
+            </div>
+            <div class="log">
+                <div class="log-entry current reveal">
+                    <div class="log-card">
+                        <div class="log-meta"><span class="badge"><i class="fas fa-play"></i> CURRENT</span> March 2024 — Present</div>
+                        <h3><i class="fas fa-user-tie"></i>Assistant Manager — Master Data &amp; IT</h3>
+                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <ul>
+                            <li>Orchestrated a seamless ERP migration with 40% less downtime than projected and 100% user adoption via structured enablement programs.</li>
+                            <li>Deployed ERP modules automating 3+ critical workflows, boosting operational throughput by 25%.</li>
+                            <li>Established a master data governance framework that elevated data accuracy by 30% across all sales channels.</li>
+                            <li>Engineered API integrations with Uber Eats, PickMe, and OMAK/TOTEM, slashing reconciliation time by 50%.</li>
+                            <li>Oversaw 40+ virtual storefronts on Uber Eats and PickMe, including multinational brand stores (Unilever uStore, Nestlé, Red Bull, Durex, Fonterra).</li>
+                            <li>Planned and executed IT infrastructure for 5+ new outlets, delivering on schedule and 10% below budget.</li>
+                            <li>Spearheaded the Celeste x SPAR partnership across 7 locations, completing ownership transition within 3 months.</li>
+                            <li>Served as primary IT escalation point — resolved 95% of priority incidents within 2 hours; trained 30+ team members.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="log-entry reveal">
+                    <div class="log-card">
+                        <div class="log-meta">July 2022 — March 2024</div>
+                        <h3><i class="fas fa-chart-line"></i>Senior Executive — Master Data &amp; IT</h3>
+                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <ul>
+                            <li>Harmonized master data across MyPOS, Uber Eats, and PickMe — achieving 100% pricing and inventory synchronization.</li>
+                            <li>Orchestrated API-driven automation that eliminated 20+ hours of manual data processing weekly.</li>
+                            <li>Managed IT setup for 5+ new outlet expansions, ensuring scalable and timely launches.</li>
+                            <li>Analyzed operational metrics to drive a 15% reduction in stock discrepancies.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="log-entry reveal">
+                    <div class="log-card">
+                        <div class="log-meta">February 2022 — June 2022</div>
+                        <h3><i class="fas fa-handshake"></i>Junior Executive — Sales</h3>
+                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <ul>
+                            <li>Onboarded new product lines and suppliers to maintain seamless stock availability.</li>
+                            <li>Ensured real-time inventory precision through proactive tracking and reconciliation.</li>
+                            <li>Monitored competitor pricing strategies to strengthen market positioning.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="log-entry reveal">
+                    <div class="log-card">
+                        <div class="log-meta">September 2021 — February 2022</div>
+                        <h3><i class="fas fa-headset"></i>Customer Care Officer</h3>
+                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <ul>
+                            <li>Served as primary customer contact, translating feedback into operational enhancements.</li>
+                            <li>Managed end-to-end order fulfillment follow-up and resolution.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="log-entry reveal">
+                    <div class="log-card">
+                        <div class="log-meta">July 2021 — September 2021</div>
+                        <h3><i class="fas fa-pizza-slice"></i>Crew Member</h3>
+                        <div class="company"><i class="fas fa-store"></i> Domino's Pizza Sri Lanka · Colombo, Sri Lanka</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+            <div class="section-head">
+                <span class="idx"><i class="fas fa-diagram-project"></i> 03</span><h2>Projects</h2><span class="rule"></span>
+            </div>
+            <div class="proj-grid">
+                <div class="proj-card reveal">
+                    <h3><i class="fas fa-cloud-upload-alt"></i>Celeste Digital Transformation</h3>
+                    <div class="proj-sub"><i class="fas fa-building"></i> Celeste Daily · Odoo.sh Cloud Migration</div>
+                    <ul>
+                        <li>Led the complete digital transformation from on-premise infrastructure to Odoo.sh cloud ecosystem.</li>
+                        <li>Drove strategic planning, budgeting, and technology partner selection.</li>
+                        <li>Directed process mapping, workflow redesign, and operational requirements gathering.</li>
+                        <li>Orchestrated mock runs, UAT, and system validation cycles.</li>
+                        <li>Managed IT hardware procurement and operational equipment deployment.</li>
+                        <li>Delivered staff training and cross-functional alignment across departments.</li>
+                    </ul>
+                </div>
+                <div class="proj-card reveal">
+                    <h3><i class="fas fa-cart-plus"></i>Custom Order Manager – OMAK</h3>
+                    <div class="proj-sub"><i class="fas fa-building"></i> Celeste Daily · OMAK Technologies</div>
+                    <ul>
+                        <li>Conceptualized and led the development of a bespoke Order Manager to replace legacy systems.</li>
+                        <li>Actively involved throughout the full lifecycle — from planning and testing to rollout.</li>
+                        <li>Delivered hands-on training to every operations team member across all Micro-Fulfillment Centers.</li>
+                        <li>Introduced automation logic that eliminated manual errors and accelerated order processing.</li>
+                    </ul>
+                </div>
+                <div class="proj-card reveal">
+                    <h3><i class="fas fa-plug"></i>UberEATS &amp; PickMe Integration</h3>
+                    <div class="proj-sub"><i class="fas fa-building"></i> OMAK Technologies + MyPOS Software Solutions</div>
+                    <ul>
+                        <li>Enabled OMAK to seamlessly integrate UberEATS and PickMe order streams with MyPOS Order Manager.</li>
+                        <li>Transformed diverse data formats into unified payloads compatible with the myPOS ecosystem.</li>
+                        <li>Real-time order injection reduced manual handling and significantly boosted operational productivity.</li>
+                    </ul>
+                </div>
+                <div class="proj-card reveal">
+                    <h3><i class="fas fa-trophy"></i>Inter Campus Hackathon 2024</h3>
+                    <div class="proj-sub"><i class="fas fa-building"></i> ESOFT Metro Campus · 2nd Runner-Up (Diploma Category)</div>
+                    <ul>
+                        <li>Role: Group Presenter | Presentation Creator | UI Designer (Figma, Canva, MS PowerPoint).</li>
+                        <li>Led the final presentation and designed UI assets for the project concept.</li>
+                        <li>Collaborated effectively within a multidisciplinary team under tight deadlines.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <div class="section-head">
+                <span class="idx"><i class="fas fa-cogs"></i> 04</span><h2>Core Skills</h2><span class="rule"></span>
+            </div>
+            <div class="skill-groups">
+                <div class="skill-group reveal">
+                    <h4><i class="fas fa-database"></i>ERP &amp; Data</h4>
+                    <div class="chip-row">
+                        <span class="chip"><i class="fas fa-arrows-rotate"></i>ERP Implementation &amp; Migration</span>
+                        <span class="chip"><i class="fas fa-shield"></i>Master Data Governance</span>
+                        <span class="chip"><i class="fas fa-code"></i>SQL · Microsoft SQL Server</span>
+                        <span class="chip"><i class="fas fa-database"></i>Database Development</span>
+                        <span class="chip"><i class="fas fa-table"></i>Relational Databases</span>
+                        <span class="chip"><i class="fas fa-sitemap"></i>Business Process Mapping</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal">
+                    <h4><i class="fas fa-plug"></i>Platforms &amp; Integration</h4>
+                    <div class="chip-row">
+                        <span class="chip"><i class="fas fa-arrow-right-arrow-left"></i>API Integration &amp; Automation</span>
+                        <span class="chip"><i class="fas fa-mobile-screen"></i>Q-Commerce (Uber Eats, PickMe)</span>
+                        <span class="chip"><i class="fas fa-cloud"></i>Odoo · myPOS</span>
+                        <span class="chip"><i class="fas fa-network-wired"></i>Retail IT Infrastructure</span>
+                        <span class="chip"><i class="fas fa-rocket"></i>System Deployment</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal">
+                    <h4><i class="fas fa-users"></i>Leadership &amp; Ops</h4>
+                    <div class="chip-row">
+                        <span class="chip"><i class="fas fa-tasks"></i>Project Management</span>
+                        <span class="chip"><i class="fas fa-people-arrows"></i>Cross-functional Coordination</span>
+                        <span class="chip"><i class="fas fa-chalkboard-user"></i>Team Training</span>
+                        <span class="chip"><i class="fas fa-coins"></i>Budgeting</span>
+                        <span class="chip"><i class="fas fa-handshake"></i>Supplier Negotiation</span>
+                        <span class="chip"><i class="fas fa-cubes"></i>Inventory Management</span>
+                    </div>
+                </div>
+                <div class="skill-group reveal">
+                    <h4><i class="fas fa-laptop-code"></i>Technical &amp; Dev</h4>
+                    <div class="chip-row">
+                        <span class="chip"><i class="fab fa-c"></i>C · C# · Java · Python</span>
+                        <span class="chip"><i class="fab fa-html5"></i>HTML · CSS</span>
+                        <span class="chip"><i class="fas fa-code"></i>Visual Studio</span>
+                        <span class="chip"><i class="fas fa-server"></i>Network Design &amp; Admin</span>
+                        <span class="chip"><i class="fas fa-lock"></i>RBAC</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECOMMENDATIONS -->
+        <section id="recommendations">
+            <div class="section-head">
+                <span class="idx"><i class="fas fa-quote-left"></i> 05</span><h2>Recommendations</h2><span class="rule"></span>
+            </div>
+            <div class="rec-grid">
+                <div class="rec-card reveal">
+                    <div class="rec-author"><i class="fas fa-user-circle"></i>Enosh Tharinda Gunathilaka</div>
+                    <div class="rec-title"><i class="fas fa-briefcase"></i> Ex-Uber Account Manager</div>
+                    <div class="rec-text">
+                        Working with Fazlan during my tenure managing the UberEats account for Celeste Daily was a seamless experience. He was consistently approachable, responsive, and proactive — qualities that made collaboration effortless. Managing a dynamic online grocery operation required constant attention to pricing, promotions, and operational adjustments, and Fazlan handled every request with precision and speed. His reliability and positive energy were instrumental in supporting Celeste's growth on the platform. Fazlan is a hardworking, supportive professional who would be an asset to any team.
+                    </div>
+                </div>
+                <div class="rec-card reveal">
+                    <div class="rec-author"><i class="fas fa-user-circle"></i>Suranga Ranatunga</div>
+                    <div class="rec-title"><i class="fas fa-briefcase"></i> Founder/Managing Director, myPOS Software Solutions</div>
+                    <div class="rec-text">
+                        I've had the privilege of collaborating with Fazlan Fairooz in his role as Assistant Manager - Master Data &amp; IT at Celeste Daily. Throughout our engagement, Fazlan demonstrated exceptional professionalism, integrity, and commitment. He serves as a vital bridge between business requirements and technical execution, always arriving prepared with a detail-oriented and proactive mindset. His deep grasp of data systems and clear communication style made every interaction efficient and productive. What truly sets Fazlan apart is his calm, solutions-driven approach under pressure. He's a professional who not only understands the technical landscape but also values long-term partnerships. Highly recommended for any organization seeking reliability, professionalism, and collaborative leadership.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education">
+            <div class="section-head">
+                <span class="idx"><i class="fas fa-graduation-cap"></i> 06</span><h2>Education &amp; Languages</h2><span class="rule"></span>
+            </div>
+            <div class="split-grid">
+                <div class="card reveal">
+                    <div class="edu-item">
+                        <div>
+                            <div class="name"><i class="fas fa-certificate"></i>Pearson BTEC Level 5 HND in Computing (General)</div>
+                            <div class="school"><i class="fas fa-university"></i> ESOFT Metro Campus, Colombo, Sri Lanka</div>
+                        </div>
+                        <div class="when">Jun 2025 – Present</div>
+                    </div>
+                    <div class="edu-item">
+                        <div>
+                            <div class="name"><i class="fas fa-certificate"></i>Level 3 Diploma in Information Technology</div>
+                            <div class="school"><i class="fas fa-university"></i> ESOFT Metro Campus, Colombo, Sri Lanka</div>
+                        </div>
+                        <div class="when">Jul 2023 – Feb 2024</div>
+                    </div>
+                    <div class="edu-item">
+                        <div>
+                            <div class="name"><i class="fas fa-school"></i>G.C.E. Ordinary Level — National Curriculum</div>
+                            <div class="school"><i class="fas fa-university"></i> Crescent School International, Colombo, Sri Lanka</div>
+                        </div>
+                        <div class="when">2006 – 2017</div>
+                    </div>
+                </div>
+                <div class="card reveal">
+                    <div class="lang-row"><span><i class="fas fa-language"></i>English</span><span class="lang-level">Professional</span></div>
+                    <div class="lang-row"><span><i class="fas fa-language"></i>Sinhala</span><span class="lang-level">Native</span></div>
+                    <div class="lang-row"><span><i class="fas fa-language"></i>Tamil</span><span class="lang-level">Native</span></div>
+                    <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border-glass);">
+                        <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dimmer); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:8px;"><i class="fas fa-hands-helping"></i> Volunteering</div>
+                        <div style="font-size:13px; color:var(--text-dim);"><i class="fas fa-life-ring"></i> <strong>Sri Lanka Live Saving Association</strong> — Disaster &amp; Humanitarian Relief</div>
+                        <div style="font-size:13px; color:var(--text-dim); margin-top:5px;"><i class="fas fa-mosque"></i> <strong>Sri Lanka Islamic Students Movements</strong> — Religious &amp; Scientific Research</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWARDS -->
+        <section id="awards">
+            <div class="section-head">
+                <span class="idx"><i class="fas fa-medal"></i> 07</span><h2>Honors &amp; Awards</h2><span class="rule"></span>
+            </div>
+            <div class="honor-grid">
+                <div class="honor-item reveal">
+                    <div class="h-title"><i class="fas fa-award" style="color:var(--amber);"></i>Longest Celestial Member Award – Head Office</div>
+                    <div class="h-meta"><i class="fas fa-building"></i> Celeste by Jaysons Retail Pvt Ltd · Jun 2025</div>
+                </div>
+                <div class="honor-item reveal">
+                    <div class="h-title"><i class="fas fa-trophy" style="color:var(--amber);"></i>2nd Runner-Up – Intercampus Hackathon</div>
+                    <div class="h-meta"><i class="fas fa-university"></i> ESOFT Metro Campus · Oct 2023</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="contact-card reveal">
+                <h2><i class="fas fa-handshake"></i>Let's build something reliable.</h2>
+                <p>Open to Business Operations, Project Management, IT Manager, E-Commerce Manager, Key Account Manager, split-shift friendly, and open to employer-sponsored relocation.</p>
+                <div class="contact-links">
+                    <a class="btn btn-primary" href="mailto:fazlanfairooz20@gmail.com"><i class="fas fa-envelope"></i> fazlanfairooz20@gmail.com</a>
+                    <a class="btn btn-ghost" href="https://linkedin.com/in/fazlanfairooz" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> linkedin.com/in/fazlanfairooz</a>
+                    <a class="btn btn-ghost" href="tel:+94760670476"><i class="fas fa-phone"></i> +94 76 067 0476</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+        <a href="https://www.instagram.com/fazlan_fairooz_?igsh=MWtzazR1bGlxMDJzZg==" target="_blank" rel="noopener noreferrer" 
+           style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 50px; 
+                  background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); 
+                  color: var(--text-dim); transition: all 0.3s ease; font-family: var(--font-mono); font-size: 13px;
+                  text-decoration: none;"
+           onmouseover="this.style.borderColor='#E1306C'; this.style.color='#E1306C'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px -6px rgba(225,48,108,0.4)'"
+           onmouseout="this.style.borderColor='var(--border-glass)'; this.style.color='var(--text-dim)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <i class="fab fa-instagram" style="font-size: 18px; color: #E1306C;"></i> Instagram
+        </a>
+        
+        <a href="https://www.linkedin.com/in/fazlan-fairooz" target="_blank" rel="noopener noreferrer" 
+           style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 50px; 
+                  background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); 
+                  color: var(--text-dim); transition: all 0.3s ease; font-family: var(--font-mono); font-size: 13px;
+                  text-decoration: none;"
+           onmouseover="this.style.borderColor='#0A66C2'; this.style.color='#0A66C2'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px -6px rgba(10,102,194,0.4)'"
+           onmouseout="this.style.borderColor='var(--border-glass)'; this.style.color='var(--text-dim)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <i class="fab fa-linkedin-in" style="font-size: 18px; color: #0A66C2;"></i> LinkedIn
+        </a>
+        
+        <a href="https://wa.me/94760670476" target="_blank" rel="noopener noreferrer" 
+           style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 50px; 
+                  background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); 
+                  color: var(--text-dim); transition: all 0.3s ease; font-family: var(--font-mono); font-size: 13px;
+                  text-decoration: none;"
+           onmouseover="this.style.borderColor='#25D366'; this.style.color='#25D366'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px -6px rgba(37,211,102,0.4)'"
+           onmouseout="this.style.borderColor='var(--border-glass)'; this.style.color='var(--text-dim)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <i class="fab fa-whatsapp" style="font-size: 18px; color: #25D366;"></i> WhatsApp
+        </a>
+    </div>
+    <div style="font-size: 11.5px; color: var(--text-dimmer); opacity: 0.7;">
+        <i class="fas fa-code"></i> 2026 Fazlan Fairooz · Colombo, Sri Lanka · Built with a vision that heads to my PASSION 
+        <i class="fas fa-heart" style="color:var(--magenta); margin: 0 4px;"></i>
+    </div>
+</footer>
+
+    <script>
+        // ---- reduce motion ----
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+
+        // ---- network bg ----
+        (function() {
+            const canvas = document.getElementById('netbg');
+            const ctx = canvas.getContext('2d');
+            let w, h, nodes = [];
+            const colors = ['0,229,255', '168,85,247', '255,46,147'];
+            const NODE_COUNT_DESKTOP = 60;
+            const NODE_COUNT_MOBILE = 28;
+            const MAX_DIST = 130;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+
+            function initNodes() {
+                const count = isCoarse ? NODE_COUNT_MOBILE : NODE_COUNT_DESKTOP;
+                nodes = Array.from({ length: count }, () => ({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.25,
+                    vy: (Math.random() - 0.5) * 0.25,
+                    r: Math.random() * 1.6 + 0.8,
+                    c: colors[Math.floor(Math.random() * colors.length)]
+                }));
+            }
+
+            function step() {
+                ctx.clearRect(0, 0, w, h);
+                for (const n of nodes) {
+                    n.x += n.vx;
+                    n.y += n.vy;
+                    if (n.x < 0 || n.x > w) n.vx *= -1;
+                    if (n.y < 0 || n.y > h) n.vy *= -1;
+                }
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const a = nodes[i],
+                            b = nodes[j];
+                        const dx = a.x - b.x,
+                            dy = a.y - b.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < MAX_DIST) {
+                            const alpha = (1 - dist / MAX_DIST) * 0.18;
+                            ctx.strokeStyle = `rgba(${a.c},${alpha})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                for (const n of nodes) {
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${n.c},0.55)`;
+                    ctx.fill();
+                }
+                if (!reducedMotion) requestAnimationFrame(step);
+            }
+
+            resize();
+            initNodes();
+            window.addEventListener('resize', () => { resize();
+                initNodes(); });
+            if (!document.hidden) step();
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && !reducedMotion) requestAnimationFrame(step);
+            });
+            if (reducedMotion) { ctx.clearRect(0, 0, w, h); }
+        })();
+
+        // ---- cursor glow ----
+        if (!isCoarse && !reducedMotion) {
+            const glow = document.getElementById('cursor-glow');
+            window.addEventListener('mousemove', (e) => {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+            });
+        } else {
+            document.getElementById('cursor-glow').style.display = 'none';
+        }
+
+        // ---- tilt effect ----
+        if (!isCoarse && !reducedMotion) {
+            document.querySelectorAll('.tilt').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateX = ((y / rect.height) - 0.5) * -6;
+                    const rotateY = ((x / rect.width) - 0.5) * 6;
+                    card.style.transform =
+                        `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
+        }
+
+        // ---- typewriter ----
+        const roles = [
+            "ERP Migration Lead",
+            "Master Data Governance",
+            "Master Data Processing",
+            "Q-Commerce Operations",
+            "E-Commerce Operations",
+            "API Integration & Automation",
+            "Key Account Management",
+            "Retail IT Infrastructure"
+        ];
+        const roleEl = document.getElementById('roleLine');
+        let ri = 0,
+            ci = 0,
+            deleting = false;
+
+        function typeLoop() {
+            const current = roles[ri];
+            if (!deleting) {
+                ci++;
+                roleEl.innerHTML = current.slice(0, ci) + '<span class="cursor">&nbsp;</span>';
+                if (ci === current.length) { deleting = true;
+                    setTimeout(typeLoop, 1400); return; }
+            } else {
+                ci--;
+                roleEl.innerHTML = current.slice(0, ci) + '<span class="cursor">&nbsp;</span>';
+                if (ci === 0) { deleting = false;
+                    ri = (ri + 1) % roles.length; }
+            }
+            setTimeout(typeLoop, deleting ? 35 : 55);
+        }
+        setTimeout(typeLoop, 1600);
+
+        // ---- AI Illusion Canvas ----
+        (function() {
+            const canvas = document.getElementById('aiCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w, h;
+
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                w = canvas.width = rect.width || 400;
+                h = canvas.height = rect.height || 400;
+                draw();
+            }
+
+            let time = 0;
+
+            function draw() {
+                if (!canvas || canvas.width === 0) return;
+                ctx.clearRect(0, 0, w, h);
+
+                // --- Core illusion: rotating geometric mandala ---
+                const cx = w / 2,
+                    cy = h / 2;
+                const maxR = Math.min(w, h) * 0.42;
+
+                // Glow layers
+                const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR);
+                grad.addColorStop(0, 'rgba(0, 229, 255, 0.04)');
+                grad.addColorStop(0.5, 'rgba(168, 85, 247, 0.06)');
+                grad.addColorStop(1, 'rgba(255, 46, 147, 0.02)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, w, h);
+
+                // Rotating rings
+                const layers = 6;
+                const baseAngle = time * 0.008;
+
+                for (let i = 0; i < layers; i++) {
+                    const radius = maxR * (0.2 + i * 0.13);
+                    const points = 10 + i * 3;
+                    const rotOffset = baseAngle + i * 0.5;
+
+                    ctx.beginPath();
+                    for (let j = 0; j <= points; j++) {
+                        const angle = (j / points) * Math.PI * 2 + rotOffset;
+                        const rVar = radius * (1 + 0.15 * Math.sin(j * 2.3 + time * 0.006 + i));
+                        const x = cx + rVar * Math.cos(angle);
+                        const y = cy + rVar * Math.sin(angle);
+                        if (j === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.closePath();
+
+                    const hue = (i * 35 + time * 0.02) % 360;
+                    const alpha = 0.15 + i * 0.04;
+                    ctx.strokeStyle = `hsla(${hue + 180}, 80%, 60%, ${alpha})`;
+                    ctx.lineWidth = 1.2 + i * 0.3;
+                    ctx.shadowColor = `hsla(${hue + 180}, 80%, 60%, 0.15)`;
+                    ctx.shadowBlur = 15;
+                    ctx.stroke();
+                }
+
+                // Inner rotating geometric shape
+                const innerPoints = 8;
+                const innerR = maxR * 0.35;
+                ctx.beginPath();
+                for (let i = 0; i <= innerPoints; i++) {
+                    const angle = (i / innerPoints) * Math.PI * 2 + baseAngle * 0.7;
+                    const rVar = innerR * (1 + 0.2 * Math.sin(i * 1.7 + time * 0.01));
+                    const x = cx + rVar * Math.cos(angle);
+                    const y = cy + rVar * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = `rgba(0, 229, 255, ${0.2 + 0.1 * Math.sin(time * 0.005)})`;
+                ctx.lineWidth = 1.5;
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = 'rgba(0, 229, 255, 0.2)';
+                ctx.stroke();
+
+                // Outer ring with dots
+                const dotCount = 24;
+                for (let i = 0; i < dotCount; i++) {
+                    const angle = (i / dotCount) * Math.PI * 2 + baseAngle * 0.4;
+                    const rDot = maxR * 0.9;
+                    const x = cx + rDot * Math.cos(angle);
+                    const y = cy + rDot * Math.sin(angle);
+                    const size = 2 + 2 * Math.sin(i * 1.1 + time * 0.01);
+                    ctx.beginPath();
+                    ctx.arc(x, y, size, 0, Math.PI * 2);
+                    const dotAlpha = 0.2 + 0.3 * Math.sin(i * 0.7 + time * 0.008);
+                    ctx.fillStyle = `rgba(168, 85, 247, ${dotAlpha})`;
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = 'rgba(168, 85, 247, 0.3)';
+                    ctx.fill();
+                }
+
+                // Connecting lines between outer dots
+                ctx.shadowBlur = 0;
+                for (let i = 0; i < dotCount; i++) {
+                    const angle1 = (i / dotCount) * Math.PI * 2 + baseAngle * 0.4;
+                    const angle2 = ((i + 6) % dotCount / dotCount) * Math.PI * 2 + baseAngle * 0.4;
+                    const r1 = maxR * 0.9;
+                    const r2 = maxR * 0.7;
+                    const x1 = cx + r1 * Math.cos(angle1);
+                    const y1 = cy + r1 * Math.sin(angle1);
+                    const x2 = cx + r2 * Math.cos(angle2);
+                    const y2 = cy + r2 * Math.sin(angle2);
+                    ctx.beginPath();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.strokeStyle = `rgba(255, 46, 147, ${0.05 + 0.05 * Math.sin(i + time * 0.005)})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+
+                // Center glow
+                const centerGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.15);
+                centerGrad.addColorStop(0, 'rgba(0, 229, 255, 0.15)');
+                centerGrad.addColorStop(1, 'rgba(0, 229, 255, 0)');
+                ctx.fillStyle = centerGrad;
+                ctx.fillRect(0, 0, w, h);
+
+                if (!reducedMotion) {
+                    time++;
+                    requestAnimationFrame(draw);
+                }
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // Redraw when parent resizes
+            const ro = new ResizeObserver(() => resizeCanvas());
+            if (canvas.parentElement) ro.observe(canvas.parentElement);
+
+            // ---- counter + reveal ----
+            function animateCounter(el) {
+                const target = parseFloat(el.dataset.target);
+                const suffix = el.dataset.suffix || '';
+                const isDecimal = target % 1 !== 0;
+                const duration = 1100;
+                const startTime = performance.now();
+
+                function step(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const value = target * eased;
+                    el.textContent = (isDecimal ? value.toFixed(1) : Math.round(value)) + suffix;
+                    if (progress < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        const counter = entry.target.querySelector('.value');
+                        if (counter && !counter.dataset.done) {
+                            counter.dataset.done = "1";
+                            animateCounter(counter);
+                            const fill = entry.target.querySelector('.bar-fill');
+                            if (fill) fill.style.width = fill.dataset.fill + '%';
+                        }
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.25 });
+            document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+            // ---- nav highlight ----
+            const navLinks = document.querySelectorAll('#mainNav a');
+            const sections = Array.from(navLinks).map(a => document.getElementById(a.dataset.target)).filter(Boolean);
+            const navIo = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const link = document.querySelector(`#mainNav a[data-target="${entry.target.id}"]`);
+                    if (!link) return;
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.35, rootMargin: '-80px 0px -40% 0px' });
+            sections.forEach(s => navIo.observe(s));
+        })();
+    </script>
+</body>
+</html>
