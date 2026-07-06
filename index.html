@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fazlan Fairooz — Systems &amp; Operations</title>
+<meta name="description" content="Fazlan Fairooz — IT & Business Operations professional. ERP migration, master data governance, Q-commerce operations, API integration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b1a20;
+    --bg-panel: #112530;
+    --bg-panel-2: #163038;
+    --text: #e9f2f1;
+    --text-dim: #90aaad;
+    --text-dimmer: #5f7a7d;
+    --accent-cyan: #4fd8c4;
+    --accent-amber: #f2a65a;
+    --border: rgba(143,167,172,0.16);
+    --border-bright: rgba(79,216,196,0.35);
+    --radius: 10px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(79,216,196,0.07), transparent 60%),
+      radial-gradient(900px 500px at 10% 0%, rgba(242,166,90,0.05), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- Top status bar ---------- */
+  .statusbar{
+    position:sticky; top:0; z-index:100;
+    background:rgba(11,26,32,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .statusbar-inner{
+    max-width:1080px; margin:0 auto; padding:0 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:56px; font-family:var(--font-mono); font-size:12.5px;
+  }
+  .status-left{display:flex; align-items:center; gap:10px; color:var(--text-dim); letter-spacing:0.02em;}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--accent-cyan); box-shadow:0 0 0 0 rgba(79,216,196,0.6); animation:pulse 2.4s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(79,216,196,0.45);}
+    70%{box-shadow:0 0 0 8px rgba(79,216,196,0);}
+    100%{box-shadow:0 0 0 0 rgba(79,216,196,0);}
+  }
+  .statusbar nav{display:flex; gap:22px;}
+  .statusbar nav a{color:var(--text-dim); text-decoration:none; font-size:12.5px; letter-spacing:0.03em; transition:color .2s;}
+  .statusbar nav a:hover{color:var(--accent-cyan);}
+  .statusbar nav{display:none;}
+  @media (min-width:720px){ .statusbar nav{display:flex;} }
+
+  /* ---------- Hero / boot console ---------- */
+  .hero{padding:92px 0 64px;}
+  .console{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .console-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 14px; border-bottom:1px solid var(--border);
+    font-family:var(--font-mono); font-size:11.5px; color:var(--text-dimmer);
+  }
+  .console-bar .chip{width:9px; height:9px; border-radius:50%; background:var(--text-dimmer); opacity:0.5;}
+  .console-body{padding:30px 26px 34px;}
+  .boot-line{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--text-dimmer);
+    margin-bottom:6px; opacity:0; animation:fadeIn .4s ease forwards;
+  }
+  .boot-line span.ok{color:var(--accent-cyan);}
+  .boot-line:nth-child(1){animation-delay:.1s;}
+  .boot-line:nth-child(2){animation-delay:.35s;}
+  .boot-line:nth-child(3){animation-delay:.6s;}
+  @keyframes fadeIn{to{opacity:1;}}
+
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(2.1rem, 5.5vw, 3.4rem);
+    letter-spacing:-0.01em;
+    margin-top:20px;
+    opacity:0; animation:fadeIn .5s ease forwards; animation-delay:.85s;
+  }
+  .hero .role-line{
+    margin-top:12px;
+    font-family:var(--font-mono);
+    font-size:15px;
+    color:var(--accent-cyan);
+    min-height:22px;
+    opacity:0; animation:fadeIn .5s ease forwards; animation-delay:1.05s;
+  }
+  .role-line .cursor{display:inline-block; width:8px; background:var(--accent-cyan); margin-left:2px; animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero p.summary{
+    margin-top:20px; max-width:640px; color:var(--text-dim); font-size:15.5px;
+    opacity:0; animation:fadeIn .5s ease forwards; animation-delay:1.2s;
+  }
+  .hero-actions{
+    margin-top:28px; display:flex; flex-wrap:wrap; gap:12px;
+    opacity:0; animation:fadeIn .5s ease forwards; animation-delay:1.35s;
+  }
+  .btn{
+    font-family:var(--font-mono); font-size:13px; letter-spacing:0.02em;
+    padding:11px 18px; border-radius:7px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition:all .2s;
+    border:1px solid var(--border);
+  }
+  .btn-primary{background:var(--accent-cyan); color:#08181a; border-color:var(--accent-cyan); font-weight:600;}
+  .btn-primary:hover{background:#6ce4d2;}
+  .btn-ghost{color:var(--text); }
+  .btn-ghost:hover{border-color:var(--border-bright); color:var(--accent-cyan);}
+  .meta-tags{
+    margin-top:22px; display:flex; flex-wrap:wrap; gap:8px;
+    opacity:0; animation:fadeIn .5s ease forwards; animation-delay:1.5s;
+  }
+  .tag{
+    font-family:var(--font-mono); font-size:11px; color:var(--text-dimmer);
+    border:1px solid var(--border); padding:5px 10px; border-radius:20px;
+  }
+
+  /* ---------- Section headings ---------- */
+  section{padding:56px 0;}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:30px;}
+  .section-head .idx{font-family:var(--font-mono); color:var(--text-dimmer); font-size:13px;}
+  .section-head h2{font-family:var(--font-display); font-size:1.5rem; font-weight:600;}
+  .section-head .rule{flex:1; height:1px; background:var(--border);}
+
+  /* ---------- KPI dashboard ---------- */
+  .kpi-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:14px;}
+  @media (min-width:640px){ .kpi-grid{grid-template-columns:repeat(3, 1fr);} }
+  .kpi-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px 18px; position:relative; overflow:hidden;
+    transition:border-color .25s, transform .25s;
+  }
+  .kpi-card:hover{border-color:var(--border-bright); transform:translateY(-2px);}
+  .kpi-card .label{font-family:var(--font-mono); font-size:10.5px; color:var(--text-dimmer); letter-spacing:0.05em; text-transform:uppercase;}
+  .kpi-card .value{font-family:var(--font-display); font-size:2rem; font-weight:700; color:var(--accent-cyan); margin-top:8px;}
+  .kpi-card .value .unit{font-size:1.1rem; color:var(--accent-cyan);}
+  .kpi-card .desc{font-size:12.5px; color:var(--text-dim); margin-top:6px;}
+  .kpi-card .bar{height:3px; background:var(--border); border-radius:2px; margin-top:14px; overflow:hidden;}
+  .kpi-card .bar-fill{height:100%; background:linear-gradient(90deg, var(--accent-cyan), var(--accent-amber)); width:0%; transition:width 1.2s cubic-bezier(.2,.8,.2,1);}
+
+  /* ---------- Experience log ---------- */
+  .log{position:relative; padding-left:26px; border-left:1px solid var(--border);}
+  .log-entry{position:relative; margin-bottom:38px;}
+  .log-entry:last-child{margin-bottom:0;}
+  .log-entry::before{
+    content:''; position:absolute; left:-31px; top:4px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent-cyan);
+  }
+  .log-entry.current::before{background:var(--accent-cyan);}
+  .log-meta{font-family:var(--font-mono); font-size:11.5px; color:var(--text-dimmer); letter-spacing:0.03em; display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .log-meta .badge{color:var(--accent-cyan); border:1px solid var(--border-bright); border-radius:4px; padding:1px 7px; font-size:10.5px;}
+  .log-entry h3{font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin-top:6px;}
+  .log-entry .company{color:var(--text-dim); font-size:13.5px; margin-top:2px;}
+  .log-entry ul{margin-top:12px; padding-left:18px; color:var(--text-dim); font-size:14px;}
+  .log-entry li{margin-bottom:7px;}
+  .log-entry li::marker{color:var(--accent-amber);}
+
+  /* ---------- Skills ---------- */
+  .skill-groups{display:grid; grid-template-columns:1fr; gap:22px;}
+  @media (min-width:720px){ .skill-groups{grid-template-columns:1fr 1fr;} }
+  .skill-group{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 20px 18px;}
+  .skill-group h4{font-family:var(--font-mono); font-size:11.5px; color:var(--accent-amber); letter-spacing:0.05em; text-transform:uppercase; margin-bottom:14px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:12.5px; padding:6px 12px; border-radius:6px;
+    background:var(--bg-panel-2); border:1px solid var(--border); color:var(--text);
+    transition:border-color .2s, color .2s;
+  }
+  .chip:hover{border-color:var(--border-bright); color:var(--accent-cyan);}
+
+  /* ---------- Education / languages ---------- */
+  .split-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  @media (min-width:720px){ .split-grid{grid-template-columns:1.4fr 1fr;} }
+  .card{background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--radius); padding:22px;}
+  .edu-item{display:flex; justify-content:space-between; gap:14px; padding:14px 0; border-bottom:1px solid var(--border);}
+  .edu-item:last-child{border-bottom:none; padding-bottom:0;}
+  .edu-item:first-child{padding-top:0;}
+  .edu-item .name{font-weight:600; font-size:14.5px;}
+  .edu-item .school{color:var(--text-dim); font-size:13px; margin-top:3px;}
+  .edu-item .when{font-family:var(--font-mono); font-size:11.5px; color:var(--text-dimmer); white-space:nowrap; text-align:right;}
+  .lang-row{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); font-size:14px;}
+  .lang-row:last-child{border-bottom:none;}
+  .lang-level{font-family:var(--font-mono); font-size:11px; color:var(--accent-cyan); border:1px solid var(--border-bright); border-radius:4px; padding:2px 8px;}
+
+  /* ---------- Contact / footer ---------- */
+  .contact-card{
+    background:linear-gradient(135deg, var(--bg-panel), var(--bg-panel-2));
+    border:1px solid var(--border-bright); border-radius:var(--radius);
+    padding:36px 30px; text-align:center;
+  }
+  .contact-card h2{font-family:var(--font-display); font-size:1.7rem; margin-bottom:10px;}
+  .contact-card p{color:var(--text-dim); max-width:480px; margin:0 auto 22px;}
+  .contact-links{display:flex; flex-wrap:wrap; justify-content:center; gap:12px;}
+  footer{padding:30px 0 50px; text-align:center; font-family:var(--font-mono); font-size:11.5px; color:var(--text-dimmer);}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="statusbar-inner">
+    <div class="status-left">
+      <span class="dot"></span>
+      <span>FAZLAN_FAIROOZ &nbsp;·&nbsp; STATUS: OPEN_TO_WORK</span>
+    </div>
+    <nav>
+      <a href="#metrics">Overview</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap hero">
+  <div class="console">
+    <div class="console-bar">
+      <span class="chip"></span><span class="chip"></span><span class="chip"></span>
+      <span style="margin-left:8px;">~/profile — system boot</span>
+    </div>
+    <div class="console-body">
+      <div class="boot-line">$ initializing profile<span class="ok">... OK</span></div>
+      <div class="boot-line">$ loading 5+ years of retail IT &amp; operations data<span class="ok">... OK</span></div>
+      <div class="boot-line">$ status: <span class="ok">READY</span></div>
+
+      <h1>Fazlan Fairooz</h1>
+      <div class="role-line" id="roleLine"></div>
+
+      <p class="summary">IT and Business Operations professional with 5+ years of experience in ERP implementation, master data governance, API integration, Q-commerce marketplace operations, and retail IT infrastructure — currently pursuing an HND in Computing (pathway to BSc Computing Top-Up).</p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:fazlanfairooz20@gmail.com">Email Me →</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/fazlanfairooz" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="tel:+94760670476">+94 76 067 0476</a>
+      </div>
+
+      <div class="meta-tags">
+        <span class="tag">Colombo, Sri Lanka</span>
+        <span class="tag">Open to relocation &amp; employer sponsorship</span>
+        <span class="tag">Remote / split-shift friendly</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="metrics">
+  <section>
+    <div class="section-head">
+      <span class="idx">01</span><h2>Live Metrics</h2><span class="rule"></span>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card reveal">
+        <div class="label">System Uptime</div>
+        <div class="value" data-target="99.9" data-suffix="%">0%</div>
+        <div class="desc">Across 10+ retail outlets &amp; online platforms</div>
+        <div class="bar"><div class="bar-fill" data-fill="99.9"></div></div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="label">ERP Migration</div>
+        <div class="value" data-target="40" data-suffix="%">0%</div>
+        <div class="desc">Less downtime than planned, 100% user adoption</div>
+        <div class="bar"><div class="bar-fill" data-fill="40"></div></div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="label">Reconciliation Time</div>
+        <div class="value" data-target="50" data-suffix="%">0%</div>
+        <div class="desc">Reduced via Uber Eats, PickMe, myPOS, Odoo APIs</div>
+        <div class="bar"><div class="bar-fill" data-fill="50"></div></div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="label">Priority Issue Resolution</div>
+        <div class="value" data-target="95" data-suffix="%">0%</div>
+        <div class="desc">Resolved within 1–2 hours</div>
+        <div class="bar"><div class="bar-fill" data-fill="95"></div></div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="label">Rollout Budget</div>
+        <div class="value" data-target="10" data-suffix="%">0%</div>
+        <div class="desc">Under budget across 5+ outlet IT rollouts</div>
+        <div class="bar"><div class="bar-fill" data-fill="10"></div></div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="label">Data Accuracy</div>
+        <div class="value" data-target="30" data-suffix="%">0%</div>
+        <div class="desc">Improvement via master data governance framework</div>
+        <div class="bar"><div class="bar-fill" data-fill="30"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head">
+      <span class="idx">02</span><h2>Deployment Log — Experience</h2><span class="rule"></span>
+    </div>
+    <div class="log">
+
+      <div class="log-entry current reveal">
+        <div class="log-meta"><span class="badge">CURRENT</span> March 2024 — Present</div>
+        <h3>Assistant Manager — Master Data &amp; IT</h3>
+        <div class="company">Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+        <ul>
+          <li>Led end-to-end ERP migration as Project Lead — 40% less downtime than planned, 100% user adoption through structured training.</li>
+          <li>Implemented ERP modules automating 3+ core workflows, improving operational efficiency by 25%.</li>
+          <li>Designed a master data governance framework improving data accuracy by 30% across sales channels.</li>
+          <li>Drove API integrations with Uber Eats, PickMe, and OMAK/TOTEM, cutting reconciliation time by 50%.</li>
+          <li>Managed 40+ virtual storefronts across Uber Eats and PickMe, including multinational brand stores (Unilever uStore, Nestlé, Red Bull, Durex, Fonterra).</li>
+          <li>Planned IT infrastructure rollouts for 5+ new outlets, delivered on schedule and 10% under budget.</li>
+          <li>Led the Celeste x SPAR partnership across 7 locations, transitioning ownership within 3 months.</li>
+          <li>Primary IT escalation point — resolved 95% of priority issues within 2 hours; trained 30+ staff.</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-meta">July 2022 — March 2024</div>
+        <h3>Senior Executive — Master Data &amp; IT</h3>
+        <div class="company">Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+        <ul>
+          <li>Synchronised master data across MyPOS, Uber Eats, and PickMe — 100% pricing and inventory accuracy.</li>
+          <li>Orchestrated API integrations automating workflows, saving 20+ hours of manual data entry per week.</li>
+          <li>Managed IT setup for 5+ new outlet expansions, ensuring scalable, on-time launches.</li>
+          <li>Analysed operational reports to reduce stock discrepancies by 15%.</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-meta">February 2022 — June 2022</div>
+        <h3>Junior Executive — Sales</h3>
+        <div class="company">Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+        <ul>
+          <li>Onboarded new products and suppliers to ensure seamless stock availability.</li>
+          <li>Maintained real-time inventory accuracy through proactive tracking.</li>
+          <li>Monitored competitor pricing to strengthen competitive positioning.</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-meta">September 2021 — February 2022</div>
+        <h3>Customer Care Officer</h3>
+        <div class="company">Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+        <ul>
+          <li>First point of contact for customer inquiries, converting feedback into operational improvements.</li>
+          <li>Managed end-to-end order fulfilment follow-up.</li>
+        </ul>
+      </div>
+
+      <div class="log-entry reveal">
+        <div class="log-meta">July 2021 — September 2021</div>
+        <h3>Crew Member</h3>
+        <div class="company">Domino's Pizza Sri Lanka · Colombo, Sri Lanka</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="idx">03</span><h2>Core Skills</h2><span class="rule"></span>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group reveal">
+        <h4>ERP &amp; Data</h4>
+        <div class="chip-row">
+          <span class="chip">ERP Implementation &amp; Migration</span>
+          <span class="chip">Master Data Governance</span>
+          <span class="chip">SQL Querying &amp; KPI Analysis</span>
+          <span class="chip">Operational Reporting</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Platforms &amp; Integration</h4>
+        <div class="chip-row">
+          <span class="chip">API Integration &amp; Automation</span>
+          <span class="chip">Q-Commerce Operations (Uber Eats, PickMe)</span>
+          <span class="chip">Catalogue &amp; Competitive Pricing</span>
+          <span class="chip">Retail IT Infrastructure &amp; Rollouts</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Finance &amp; Ops</h4>
+        <div class="chip-row">
+          <span class="chip">Financial Reconciliation Support</span>
+          <span class="chip">Vendor &amp; Stakeholder Coordination</span>
+          <span class="chip">Account Management</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>People &amp; Process</h4>
+        <div class="chip-row">
+          <span class="chip">Staff Training</span>
+          <span class="chip">Process Compliance</span>
+          <span class="chip">Cross-functional Leadership</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head">
+      <span class="idx">04</span><h2>Education &amp; Languages</h2><span class="rule"></span>
+    </div>
+    <div class="split-grid">
+      <div class="card reveal">
+        <div class="edu-item">
+          <div>
+            <div class="name">Level 5 BTEC HND in Computing (General)</div>
+            <div class="school">ESOFT Metro Campus, Colombo, Sri Lanka</div>
+          </div>
+          <div class="when">Jun 2025 – Present</div>
+        </div>
+        <div class="edu-item">
+          <div>
+            <div class="name">Level 3 Diploma in Information Technology</div>
+            <div class="school">ESOFT Metro Campus, Colombo, Sri Lanka</div>
+          </div>
+          <div class="when">Jul 2023 – Feb 2024</div>
+        </div>
+        <div class="edu-item">
+          <div>
+            <div class="name">G.C.E. Ordinary Level — National Curriculum</div>
+            <div class="school">Crescent School International, Colombo, Sri Lanka</div>
+          </div>
+          <div class="when">2006 – 2017</div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="lang-row"><span>English</span><span class="lang-level">Professional</span></div>
+        <div class="lang-row"><span>Sinhala</span><span class="lang-level">Native</span></div>
+        <div class="lang-row"><span>Tamil</span><span class="lang-level">Native</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-card reveal">
+      <h2>Let's build something reliable.</h2>
+      <p>Open to Business Operations, Project Management, Data Analytics, and Finance Operations roles — remote-first, split-shift friendly, and open to employer-sponsored relocation.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:fazlanfairooz20@gmail.com">fazlanfairooz20@gmail.com</a>
+        <a class="btn btn-ghost" href="https://linkedin.com/in/fazlanfairooz" target="_blank" rel="noopener">linkedin.com/in/fazlanfairooz</a>
+        <a class="btn btn-ghost" href="tel:+94760670476">+94 76 067 0476</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>© 2026 Fazlan Fairooz · Colombo, Sri Lanka · Built with a text editor, not a template.</footer>
+
+<script>
+  // Typewriter cycling role line
+  const roles = [
+    "ERP Migration Lead",
+    "Master Data Governance",
+    "Q-Commerce Operations",
+    "API Integration & Automation",
+    "Retail IT Infrastructure"
+  ];
+  const roleEl = document.getElementById('roleLine');
+  let ri = 0, ci = 0, deleting = false;
+
+  function typeLoop(){
+    const current = roles[ri];
+    if(!deleting){
+      ci++;
+      roleEl.innerHTML = current.slice(0, ci) + '<span class="cursor">&nbsp;</span>';
+      if(ci === current.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
+    } else {
+      ci--;
+      roleEl.innerHTML = current.slice(0, ci) + '<span class="cursor">&nbsp;</span>';
+      if(ci === 0){ deleting = false; ri = (ri + 1) % roles.length; }
+    }
+    setTimeout(typeLoop, deleting ? 35 : 55);
+  }
+  setTimeout(typeLoop, 1600);
+
+  // Count-up KPI values on scroll into view
+  const counters = document.querySelectorAll('.kpi-card .value');
+  const bars = document.querySelectorAll('.bar-fill');
+
+  function animateCounter(el){
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = target % 1 !== 0;
+    let start = 0;
+    const duration = 1100;
+    const startTime = performance.now();
+    function step(now){
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = start + (target - start) * eased;
+      el.textContent = (isDecimal ? value.toFixed(1) : Math.round(value)) + suffix;
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        const counter = entry.target.querySelector('.value');
+        if(counter && !counter.dataset.done){
+          counter.dataset.done = "1";
+          animateCounter(counter);
+          const fill = entry.target.querySelector('.bar-fill');
+          if(fill) fill.style.width = fill.dataset.fill + '%';
+        }
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
