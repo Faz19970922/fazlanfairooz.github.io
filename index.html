@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <title>Fazlan Fairooz · IT & Operations</title>
-    <meta name="description" content="Fazlan Fairooz — IT & Business Operations professional. ERP migration, master data governance, Q-commerce operations, API integration." />
+    <title>Fazlan Fairooz · Systems, Data & Retail Operations</title>
+    <meta name="description" content="Fazlan Fairooz — IT & Business Operations professional based in Colombo, Sri Lanka. ERP migration, master data governance, Q-commerce operations, and API integration for retail and e-commerce." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * {
@@ -17,28 +17,40 @@
         }
 
         :root {
-            --bg: #060b14;
-            --bg-alt: #0a1424;
-            --glass: rgba(18, 28, 46, 0.55);
-            --glass-strong: rgba(18, 28, 46, 0.78);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(0, 229, 255, 0.35);
-            --text: #eef3f8;
-            --text-dim: #8fa2b8;
-            --text-dimmer: #526078;
-            --cyan: #00e5ff;
-            --violet: #a855f7;
-            --magenta: #ff2e93;
-            --amber: #ffb020;
-            --radius: 14px;
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', sans-serif;
+            --bg: #050608;
+            --bg-alt: #0a0d14;
+            --glass: rgba(10, 16, 26, 0.62);
+            --glass-strong: rgba(10, 16, 26, 0.84);
+            --border-glass: rgba(157, 224, 234, 0.14);
+            --border-glow: rgba(0, 255, 242, 0.45);
+            --text: #e8fbff;
+            --text-dim: #8fa8b3;
+            --text-dimmer: #4d6169;
+            --cyan: #00fff2;
+            --violet: #b026ff;
+            --magenta: #ff2079;
+            --lime: #39ff14;
+            --amber: #fcee0a;
+            --yellow: #fcee0a;
+            --radius: 0px;
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
         html {
             scroll-behavior: smooth;
             height: 100%;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
 
         body {
@@ -71,6 +83,7 @@
             inset: 0;
             z-index: 0;
             display: block;
+            pointer-events: none;
         }
         .grain-overlay {
             position: fixed;
@@ -78,16 +91,16 @@
             z-index: 1;
             pointer-events: none;
             background:
-                radial-gradient(1400px 700px at 15% -5%, rgba(0, 229, 255, 0.06), transparent 55%),
-                radial-gradient(1200px 700px at 90% 10%, rgba(168, 85, 247, 0.07), transparent 55%),
-                radial-gradient(900px 600px at 50% 100%, rgba(255, 46, 147, 0.05), transparent 55%);
+                radial-gradient(1400px 700px at 15% -5%, rgba(5, 217, 232, 0.06), transparent 55%),
+                radial-gradient(1200px 700px at 90% 10%, rgba(157, 78, 221, 0.07), transparent 55%),
+                radial-gradient(900px 600px at 50% 100%, rgba(255, 42, 109, 0.05), transparent 55%);
         }
         #cursor-glow {
             position: fixed;
             width: 420px;
             height: 420px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.10), rgba(168, 85, 247, 0.06) 45%, transparent 70%);
+            background: radial-gradient(circle, rgba(5, 217, 232, 0.10), rgba(157, 78, 221, 0.06) 45%, transparent 70%);
             pointer-events: none;
             z-index: 1;
             transform: translate(-50%, -50%);
@@ -136,19 +149,19 @@
             height: 8px;
             border-radius: 50%;
             background: var(--cyan);
-            box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(0, 229, 255, 0.6);
+            box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(5, 217, 232, 0.6);
             animation: pulse 2.2s infinite;
             flex-shrink: 0;
         }
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(0, 229, 255, 0.45);
+                box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(5, 217, 232, 0.45);
             }
             70% {
-                box-shadow: 0 0 10px var(--cyan), 0 0 0 9px rgba(0, 229, 255, 0);
+                box-shadow: 0 0 10px var(--cyan), 0 0 0 9px rgba(5, 217, 232, 0);
             }
             100% {
-                box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(0, 229, 255, 0);
+                box-shadow: 0 0 10px var(--cyan), 0 0 0 0 rgba(5, 217, 232, 0);
             }
         }
         .status-left i {
@@ -223,7 +236,7 @@
             inset: 0;
             padding: 1px;
             border-radius: var(--radius);
-            background: linear-gradient(120deg, rgba(0, 229, 255, 0.5), rgba(168, 85, 247, 0.25), rgba(255, 46, 147, 0.35));
+            background: linear-gradient(120deg, rgba(5, 217, 232, 0.5), rgba(157, 78, 221, 0.25), rgba(255, 42, 109, 0.35));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -267,35 +280,35 @@
             inset: 0;
             border-radius: 12px;
             background:
-                radial-gradient(circle at 30% 40%, rgba(0, 229, 255, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.20) 0%, transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(255, 46, 147, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, rgba(255, 176, 32, 0.08) 0%, transparent 40%),
-                linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(168, 85, 247, 0.08));
+                radial-gradient(circle at 30% 40%, rgba(5, 217, 232, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(157, 78, 221, 0.20) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(255, 42, 109, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(252, 238, 10, 0.08) 0%, transparent 40%),
+                linear-gradient(135deg, rgba(5, 217, 232, 0.05), rgba(157, 78, 221, 0.08));
             background-blend-mode: screen;
             animation: ambientGlow 8s ease-in-out infinite alternate;
         }
         @keyframes ambientGlow {
             0% {
                 background:
-                    radial-gradient(circle at 30% 40%, rgba(0, 229, 255, 0.15) 0%, transparent 60%),
-                    radial-gradient(circle at 70% 60%, rgba(168, 85, 247, 0.20) 0%, transparent 50%),
-                    radial-gradient(circle at 50% 80%, rgba(255, 46, 147, 0.12) 0%, transparent 50%),
-                    radial-gradient(circle at 20% 80%, rgba(255, 176, 32, 0.08) 0%, transparent 40%);
+                    radial-gradient(circle at 30% 40%, rgba(5, 217, 232, 0.15) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 60%, rgba(157, 78, 221, 0.20) 0%, transparent 50%),
+                    radial-gradient(circle at 50% 80%, rgba(255, 42, 109, 0.12) 0%, transparent 50%),
+                    radial-gradient(circle at 20% 80%, rgba(252, 238, 10, 0.08) 0%, transparent 40%);
             }
             50% {
                 background:
-                    radial-gradient(circle at 60% 30%, rgba(0, 229, 255, 0.20) 0%, transparent 55%),
-                    radial-gradient(circle at 30% 70%, rgba(168, 85, 247, 0.25) 0%, transparent 45%),
-                    radial-gradient(circle at 70% 80%, rgba(255, 46, 147, 0.15) 0%, transparent 50%),
-                    radial-gradient(circle at 40% 20%, rgba(255, 176, 32, 0.10) 0%, transparent 40%);
+                    radial-gradient(circle at 60% 30%, rgba(5, 217, 232, 0.20) 0%, transparent 55%),
+                    radial-gradient(circle at 30% 70%, rgba(157, 78, 221, 0.25) 0%, transparent 45%),
+                    radial-gradient(circle at 70% 80%, rgba(255, 42, 109, 0.15) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 20%, rgba(252, 238, 10, 0.10) 0%, transparent 40%);
             }
             100% {
                 background:
-                    radial-gradient(circle at 40% 50%, rgba(0, 229, 255, 0.18) 0%, transparent 50%),
-                    radial-gradient(circle at 60% 70%, rgba(168, 85, 247, 0.22) 0%, transparent 50%),
-                    radial-gradient(circle at 30% 30%, rgba(255, 46, 147, 0.14) 0%, transparent 45%),
-                    radial-gradient(circle at 70% 40%, rgba(255, 176, 32, 0.09) 0%, transparent 45%);
+                    radial-gradient(circle at 40% 50%, rgba(5, 217, 232, 0.18) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 70%, rgba(157, 78, 221, 0.22) 0%, transparent 50%),
+                    radial-gradient(circle at 30% 30%, rgba(255, 42, 109, 0.14) 0%, transparent 45%),
+                    radial-gradient(circle at 70% 40%, rgba(252, 238, 10, 0.09) 0%, transparent 45%);
             }
         }
 
@@ -310,7 +323,7 @@
         .orb-1 {
             width: 120px;
             height: 120px;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.3), rgba(0, 229, 255, 0.05));
+            background: radial-gradient(circle, rgba(5, 217, 232, 0.3), rgba(5, 217, 232, 0.05));
             top: 15%;
             right: 20%;
             animation-delay: 0s;
@@ -318,7 +331,7 @@
         .orb-2 {
             width: 80px;
             height: 80px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.35), rgba(168, 85, 247, 0.05));
+            background: radial-gradient(circle, rgba(157, 78, 221, 0.35), rgba(157, 78, 221, 0.05));
             bottom: 25%;
             left: 15%;
             animation-delay: 2s;
@@ -327,7 +340,7 @@
         .orb-3 {
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle, rgba(255, 46, 147, 0.3), rgba(255, 46, 147, 0.05));
+            background: radial-gradient(circle, rgba(255, 42, 109, 0.3), rgba(255, 42, 109, 0.05));
             top: 55%;
             right: 10%;
             animation-delay: 4s;
@@ -336,7 +349,7 @@
         .orb-4 {
             width: 100px;
             height: 100px;
-            background: radial-gradient(circle, rgba(255, 176, 32, 0.2), rgba(255, 176, 32, 0.03));
+            background: radial-gradient(circle, rgba(252, 238, 10, 0.2), rgba(252, 238, 10, 0.03));
             bottom: 10%;
             right: 30%;
             animation-delay: 1s;
@@ -345,7 +358,7 @@
         .orb-5 {
             width: 50px;
             height: 50px;
-            background: radial-gradient(circle, rgba(0, 229, 255, 0.25), rgba(0, 229, 255, 0.02));
+            background: radial-gradient(circle, rgba(5, 217, 232, 0.25), rgba(5, 217, 232, 0.02));
             top: 25%;
             left: 10%;
             animation-delay: 3s;
@@ -378,8 +391,8 @@
             inset: 0;
             border-radius: 12px;
             background-image:
-                linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(5, 217, 232, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(5, 217, 232, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
             animation: gridPulse 6s ease-in-out infinite alternate;
@@ -423,7 +436,7 @@
         }
         .boot-line span.ok {
             color: var(--cyan);
-            text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+            text-shadow: 0 0 8px rgba(5, 217, 232, 0.5);
         }
         .boot-line:nth-child(1) {
             animation-delay: 0.1s;
@@ -466,7 +479,7 @@
             font-family: var(--font-mono);
             font-size: 16px;
             color: var(--cyan);
-            text-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+            text-shadow: 0 0 12px rgba(5, 217, 232, 0.35);
             min-height: 22px;
             opacity: 0;
             animation: fadeIn 0.5s ease forwards;
@@ -513,26 +526,28 @@
         .btn {
             font-family: var(--font-mono);
             font-size: 13px;
-            letter-spacing: 0.02em;
-            padding: 11px 20px;
-            border-radius: 9px;
+            letter-spacing: 0.04em;
+            padding: 12px 22px;
+            border-radius: 0;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.25s;
+            transition: all 0.2s;
             border: 1px solid var(--border-glass);
             cursor: pointer;
+            position: relative;
         }
         .btn-primary {
             background: linear-gradient(90deg, var(--cyan), var(--violet));
             color: #04121a;
             font-weight: 700;
             border: none;
-            box-shadow: 0 0 0 rgba(0, 229, 255, 0);
+            box-shadow: 0 0 0 rgba(5, 217, 232, 0);
         }
         .btn-primary:hover {
-            box-shadow: 0 8px 30px -6px rgba(0, 229, 255, 0.55);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 30px -6px rgba(5, 217, 232, 0.65), 0 0 0 1px var(--yellow);
+            transform: translate(-2px, -2px);
         }
         .btn-ghost {
             color: var(--text);
@@ -541,9 +556,11 @@
         .btn-ghost:hover {
             border-color: var(--cyan);
             color: var(--cyan);
-            box-shadow: 0 0 18px -4px rgba(0, 229, 255, 0.4);
-            transform: translateY(-2px);
+            box-shadow: 0 0 18px -4px rgba(5, 217, 232, 0.5), inset 0 0 12px -6px rgba(5, 217, 232, 0.4);
+            transform: translate(-2px, -2px);
+            text-shadow: 0 0 8px rgba(5, 217, 232, 0.6);
         }
+        .btn:active { transform: translate(0,0) scale(0.97); }
 
         .meta-tags {
             margin-top: 20px;
@@ -560,12 +577,15 @@
             color: var(--text-dimmer);
             border: 1px solid var(--border-glass);
             padding: 5px 12px;
-            border-radius: 20px;
+            border-radius: 0;
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
             background: rgba(255, 255, 255, 0.02);
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: border-color .2s, color .2s;
         }
+        .tag:hover { border-color: var(--yellow); color: var(--yellow); }
         .tag i {
             color: var(--cyan);
             font-size: 10px;
@@ -661,7 +681,7 @@
             font-family: var(--font-mono);
             font-size: 13px;
             color: var(--cyan);
-            text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+            text-shadow: 0 0 8px rgba(5, 217, 232, 0.4);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -720,7 +740,7 @@
         }
         .kpi-card:hover {
             border-color: var(--accent, var(--border-glow));
-            box-shadow: 0 20px 50px -20px var(--accent-shadow, rgba(0, 229, 255, 0.35));
+            box-shadow: 0 20px 50px -20px var(--accent-shadow, rgba(5, 217, 232, 0.35));
         }
         .kpi-card .label {
             font-family: var(--font-mono);
@@ -735,7 +755,7 @@
             font-weight: 700;
             color: var(--accent, var(--cyan));
             margin-top: 6px;
-            text-shadow: 0 0 22px var(--accent-shadow, rgba(0, 229, 255, 0.35));
+            text-shadow: 0 0 22px var(--accent-shadow, rgba(5, 217, 232, 0.35));
         }
         .kpi-card .desc {
             font-size: 13px;
@@ -806,7 +826,7 @@
             border-radius: 50%;
             background: var(--bg);
             border: 2px solid var(--cyan);
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            box-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
         }
         .log-entry.current::before {
             background: var(--cyan);
@@ -817,12 +837,13 @@
             border: 1px solid var(--border-glass);
             border-radius: var(--radius);
             padding: 22px 26px;
+            position: relative;
             backdrop-filter: blur(10px);
             transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
         }
         .log-card:hover {
             border-color: var(--border-glow);
-            box-shadow: 0 20px 60px -30px rgba(0, 229, 255, 0.35);
+            box-shadow: 0 20px 60px -30px rgba(5, 217, 232, 0.35);
             transform: translateY(-2px);
         }
         .log-meta {
@@ -842,6 +863,11 @@
             padding: 2px 10px;
             font-size: 10.5px;
             font-weight: 700;
+            animation: badgePulse 2.4s ease-in-out infinite;
+        }
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(5, 217, 232, 0); }
+            50% { box-shadow: 0 0 14px rgba(5, 217, 232, 0.55); }
         }
         .log-card h3 {
             font-family: var(--font-display);
@@ -897,12 +923,13 @@
             border: 1px solid var(--border-glass);
             border-radius: var(--radius);
             padding: 22px 24px 22px;
+            position: relative;
             backdrop-filter: blur(10px);
             transition: border-color 0.25s, box-shadow 0.25s;
         }
         .skill-group:hover {
             border-color: var(--border-glow);
-            box-shadow: 0 20px 50px -30px rgba(168, 85, 247, 0.35);
+            box-shadow: 0 20px 50px -30px rgba(157, 78, 221, 0.35);
         }
         .skill-group h4 {
             font-family: var(--font-mono);
@@ -940,7 +967,7 @@
             border-color: var(--cyan);
             color: var(--cyan);
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px -6px rgba(0, 229, 255, 0.4);
+            box-shadow: 0 6px 18px -6px rgba(5, 217, 232, 0.4);
         }
 
         .split-grid {
@@ -958,12 +985,13 @@
             border: 1px solid var(--border-glass);
             border-radius: var(--radius);
             padding: 24px 26px;
+            position: relative;
             backdrop-filter: blur(10px);
             transition: border-color 0.25s, box-shadow 0.25s;
         }
         .card:hover {
             border-color: var(--border-glow);
-            box-shadow: 0 20px 50px -30px rgba(0, 229, 255, 0.3);
+            box-shadow: 0 20px 50px -30px rgba(5, 217, 232, 0.3);
         }
         .edu-item {
             display: flex;
@@ -1023,7 +1051,7 @@
             border: 1px solid var(--border-glow);
             border-radius: 5px;
             padding: 2px 10px;
-            text-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
+            text-shadow: 0 0 6px rgba(5, 217, 232, 0.4);
         }
 
         .rec-grid {
@@ -1041,12 +1069,13 @@
             border: 1px solid var(--border-glass);
             border-radius: var(--radius);
             padding: 22px 26px;
+            position: relative;
             backdrop-filter: blur(10px);
             transition: border-color 0.25s, box-shadow 0.25s;
         }
         .rec-card:hover {
             border-color: var(--border-glow);
-            box-shadow: 0 20px 50px -30px rgba(168, 85, 247, 0.3);
+            box-shadow: 0 20px 50px -30px rgba(157, 78, 221, 0.3);
         }
         .rec-card .rec-author {
             font-weight: 600;
@@ -1096,7 +1125,7 @@
         }
         .proj-card:hover {
             border-color: var(--border-glow);
-            box-shadow: 0 20px 50px -30px rgba(0, 229, 255, 0.3);
+            box-shadow: 0 20px 50px -30px rgba(5, 217, 232, 0.3);
         }
         .proj-card h3 {
             font-family: var(--font-display);
@@ -1218,6 +1247,8 @@
             font-family: var(--font-mono);
             font-size: 12px;
             color: var(--text-dimmer);
+            position: relative;
+            z-index: 5;
         }
         footer i {
             color: var(--magenta);
@@ -1248,6 +1279,118 @@
             }
         }
 
+        /* ----- scroll progress bar ----- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--cyan), var(--violet), var(--magenta));
+            box-shadow: 0 0 12px rgba(5, 217, 232, 0.6);
+            z-index: 200;
+            transition: width 0.12s linear;
+        }
+
+        /* ----- scroll to top button ----- */
+        #scroll-top {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--glass-strong);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 90;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity 0.3s, transform 0.3s, border-color 0.3s, box-shadow 0.3s, visibility 0.3s;
+        }
+        #scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #scroll-top:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 8px 26px -8px rgba(5, 217, 232, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* ----- animated section rule ----- */
+        .section-head .rule {
+            background: linear-gradient(90deg, rgba(5, 217, 232, 0.35), rgba(157, 78, 221, 0.25), transparent 75%);
+            background-size: 200% 100%;
+            animation: ruleSweep 5s linear infinite;
+        }
+        @keyframes ruleSweep {
+            to { background-position: -200% 0; }
+        }
+
+        /* ----- floating kpi icons ----- */
+        .kpi-card .kpi-icon {
+            animation: iconFloat 3.4s ease-in-out infinite;
+        }
+        .kpi-card:nth-child(2) .kpi-icon { animation-delay: 0.3s; }
+        .kpi-card:nth-child(3) .kpi-icon { animation-delay: 0.6s; }
+        .kpi-card:nth-child(4) .kpi-icon { animation-delay: 0.9s; }
+        .kpi-card:nth-child(5) .kpi-icon { animation-delay: 1.2s; }
+        .kpi-card:nth-child(6) .kpi-icon { animation-delay: 1.5s; }
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* ----- staggered reveal: experience & project bullets ----- */
+        .log-card li,
+        .proj-card li {
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+        .log-entry.in .log-card li,
+        .proj-card.in li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .log-entry.in .log-card li:nth-child(1), .proj-card.in li:nth-child(1) { transition-delay: 0.05s; }
+        .log-entry.in .log-card li:nth-child(2), .proj-card.in li:nth-child(2) { transition-delay: 0.1s; }
+        .log-entry.in .log-card li:nth-child(3), .proj-card.in li:nth-child(3) { transition-delay: 0.15s; }
+        .log-entry.in .log-card li:nth-child(4), .proj-card.in li:nth-child(4) { transition-delay: 0.2s; }
+        .log-entry.in .log-card li:nth-child(5), .proj-card.in li:nth-child(5) { transition-delay: 0.25s; }
+        .log-entry.in .log-card li:nth-child(6), .proj-card.in li:nth-child(6) { transition-delay: 0.3s; }
+        .log-entry.in .log-card li:nth-child(7), .proj-card.in li:nth-child(7) { transition-delay: 0.35s; }
+        .log-entry.in .log-card li:nth-child(8), .proj-card.in li:nth-child(8) { transition-delay: 0.4s; }
+
+        /* ----- staggered reveal: skill chips ----- */
+        .chip {
+            opacity: 0;
+            transform: translateY(6px) scale(0.96);
+            transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .skill-group.in .chip {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .skill-group.in .chip:nth-child(1) { transition-delay: 0.04s; }
+        .skill-group.in .chip:nth-child(2) { transition-delay: 0.09s; }
+        .skill-group.in .chip:nth-child(3) { transition-delay: 0.14s; }
+        .skill-group.in .chip:nth-child(4) { transition-delay: 0.19s; }
+        .skill-group.in .chip:nth-child(5) { transition-delay: 0.24s; }
+        .skill-group.in .chip:nth-child(6) { transition-delay: 0.29s; }
+
+        /* ----- magnetic buttons ----- */
+        .btn { will-change: transform; }
+
         @media (min-width: 2000px) {
             .wrap {
                 max-width: 2000px;
@@ -1270,13 +1413,254 @@
                 font-size: 1.9rem;
             }
         }
+        /* ================================================================
+           CYBERPUNK HUD OVERHAUL — bolder palette, angular panels, max motion
+           ================================================================ */
+
+        :root {
+            --hud-clip: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+            --hud-clip-sm: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+        }
+
+        /* ---- full-screen scanlines ---- */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            pointer-events: none;
+            background: repeating-linear-gradient(to bottom,
+                rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px,
+                transparent 1px, transparent 3px);
+            mix-blend-mode: overlay;
+            animation: scanDrift 5s linear infinite;
+        }
+        @keyframes scanDrift { from { background-position: 0 0; } to { background-position: 0 60px; } }
+
+        /* ---- animated cyber grid floor ---- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.55;
+            background-image:
+                linear-gradient(rgba(0,255,242,0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,242,0.07) 1px, transparent 1px),
+                linear-gradient(rgba(255,32,121,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,32,121,0.045) 1px, transparent 1px);
+            background-size: 44px 44px, 44px 44px, 220px 220px, 220px 220px;
+            animation: gridDrift 9s linear infinite;
+        }
+        @keyframes gridDrift { from { background-position: 0 0, 0 0, 0 0, 0 0; } to { background-position: 44px 44px, 44px 44px, 220px 220px, 220px 220px; } }
+
+        @media (pointer: coarse) {
+            body::before, body::after { animation: none; }
+        }
+
+        /* ---- HUD status ticker ---- */
+        .hud-ticker {
+            overflow: hidden;
+            white-space: nowrap;
+            background: linear-gradient(90deg, rgba(0,255,242,0.09), rgba(255,32,121,0.09));
+            border-bottom: 1px solid var(--border-glass);
+            position: relative;
+            z-index: 3;
+        }
+        .hud-ticker-track {
+            display: inline-flex;
+            animation: tickerScroll 18s linear infinite;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.09em;
+            color: var(--cyan);
+            text-shadow: 0 0 6px rgba(0,255,242,0.5);
+        }
+        .hud-ticker-track span {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 22px;
+            border-left: 1px solid rgba(0,255,242,0.25);
+            flex-shrink: 0;
+        }
+        @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* ---- reticle cursor (replaces soft glow) ---- */
+        #cursor-glow {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1.5px solid var(--cyan);
+            box-shadow: 0 0 14px rgba(0,255,242,0.55), inset 0 0 10px rgba(0,255,242,0.25);
+            mix-blend-mode: normal;
+            animation: reticleSpin 3.5s linear infinite;
+        }
+        #cursor-glow::before, #cursor-glow::after {
+            content: '';
+            position: absolute;
+            background: var(--cyan);
+            box-shadow: 0 0 6px rgba(0,255,242,0.7);
+        }
+        #cursor-glow::before { top: 50%; left: -7px; width: 7px; height: 1.5px; transform: translateY(-50%); }
+        #cursor-glow::after { top: -7px; left: 50%; width: 1.5px; height: 7px; transform: translateX(-50%); }
+        @keyframes reticleSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* ---- glitch flicker on hero name ---- */
+        .hero h1 {
+            animation: fadeIn 0.5s ease forwards, sheen 5s linear infinite, glitchFlicker 3.4s steps(1) infinite;
+            animation-delay: 0.85s, 1.4s, 2.2s;
+        }
+        @keyframes glitchFlicker {
+            0%, 91%, 100% { text-shadow: none; transform: translate(0,0); }
+            92% { text-shadow: -2px 0 var(--magenta), 2px 0 var(--cyan); transform: translate(-1px,0); }
+            93% { text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan); transform: translate(1px,0); }
+            94% { text-shadow: none; transform: translate(0,0); }
+            96% { text-shadow: -1px 0 var(--lime), 1px 0 var(--magenta); }
+            97% { text-shadow: none; }
+        }
+
+        /* ---- angular clipped panels (HUD frames) ---- */
+        .kpi-card, .log-card, .proj-card, .rec-card, .card,
+        .skill-group, .honor-item, .contact-card, .console {
+            border-radius: 0;
+            clip-path: var(--hud-clip);
+        }
+        .kpi-card::after, .log-card::after, .proj-card::after, .rec-card::after, .card::after,
+        .skill-group::after, .honor-item::after, .contact-card::after, .console::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(var(--cyan), var(--cyan)),
+                linear-gradient(var(--cyan), var(--cyan)),
+                linear-gradient(var(--magenta), var(--magenta)),
+                linear-gradient(var(--magenta), var(--magenta));
+            background-repeat: no-repeat;
+            background-size: 2px 18px, 18px 2px, 2px 18px, 18px 2px;
+            background-position:
+                top 6px left 6px,
+                top 6px left 6px,
+                bottom 6px right 6px,
+                bottom 6px right 6px;
+            opacity: 0.9;
+        }
+
+        /* ---- ambient breathing border glow (constant motion, not just on hover) ---- */
+        .kpi-card, .log-card, .proj-card, .rec-card, .card, .skill-group, .honor-item {
+            animation: hudBreathe 4.5s ease-in-out infinite;
+        }
+        .kpi-card:nth-child(2), .rec-card:nth-child(2) { animation-delay: 0.6s; }
+        .kpi-card:nth-child(3) { animation-delay: 1.2s; }
+        .kpi-card:nth-child(4) { animation-delay: 1.8s; }
+        .kpi-card:nth-child(5) { animation-delay: 2.4s; }
+        .kpi-card:nth-child(6) { animation-delay: 3s; }
+        @keyframes hudBreathe {
+            0%, 100% { border-color: rgba(0,255,242,0.18); }
+            50% { border-color: rgba(255,32,121,0.32); }
+        }
+
+        /* ---- angular buttons, chips, tags, badges ---- */
+        .btn {
+            border-radius: 0;
+            clip-path: var(--hud-clip-sm);
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -60%;
+            width: 40%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.55s ease;
+        }
+        .btn:hover::before { left: 130%; }
+
+        .chip, .tag, .badge {
+            border-radius: 0;
+            clip-path: var(--hud-clip-sm);
+        }
+
+        /* ---- faster / more intense ambient pulses ---- */
+        .dot { animation: pulse 1.3s infinite; }
+        .kpi-card .kpi-icon { animation-duration: 2.1s; }
+        .log-meta .badge { animation: badgePulse 1.5s ease-in-out infinite; }
+        .bar-fill::after { animation-duration: 1.4s; }
+
+        /* ---- periodic data-glitch on KPI values ---- */
+        .kpi-card .value { animation: valueGlitch 5.5s steps(1) infinite; }
+        .kpi-card:nth-child(2) .value { animation-delay: 0.5s; }
+        .kpi-card:nth-child(3) .value { animation-delay: 1s; }
+        .kpi-card:nth-child(4) .value { animation-delay: 1.5s; }
+        .kpi-card:nth-child(5) .value { animation-delay: 2s; }
+        .kpi-card:nth-child(6) .value { animation-delay: 2.5s; }
+        @keyframes valueGlitch {
+            0%, 94%, 100% { filter: none; }
+            95% { filter: hue-rotate(90deg) brightness(1.4); }
+            96% { filter: none; }
+            98% { filter: hue-rotate(-60deg) brightness(1.3); }
+            99% { filter: none; }
+        }
+
+        /* ---- one-time boot power-on flicker ---- */
+        #boot-flicker {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            pointer-events: none;
+            background: #eafffe;
+            animation: bootFlicker 0.9s steps(1) forwards;
+        }
+        @keyframes bootFlicker {
+            0% { opacity: 1; }
+            6% { opacity: 0; }
+            11% { opacity: 0.85; }
+            16% { opacity: 0; }
+            24% { opacity: 0.5; }
+            30% { opacity: 0; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #boot-flicker { display: none; }
+        }
+
+        /* ---- chromatic-aberration glitch jolt on hover ---- */
+        .kpi-card, .log-card, .proj-card, .rec-card, .card, .skill-group, .honor-item {
+            transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+        }
+        .kpi-card:hover, .log-card:hover, .proj-card:hover, .rec-card:hover,
+        .card:hover, .skill-group:hover, .honor-item:hover {
+            box-shadow:
+                2px 0 0 rgba(255, 32, 121, 0.35),
+                -2px 0 0 rgba(0, 255, 242, 0.35),
+                0 0 26px -8px rgba(0, 255, 242, 0.4);
+        }
+
+        /* ---- nav link glitch hover ---- */
+        .statusbar nav a {
+            transition: color 0.15s, text-shadow 0.15s;
+        }
+        .statusbar nav a:hover {
+            color: var(--cyan);
+            text-shadow: -1px 0 var(--magenta), 1px 0 var(--cyan);
+        }
+
     </style>
 </head>
 <body>
 
+    <div id="boot-flicker"></div>
     <canvas id="netbg"></canvas>
     <div class="grain-overlay"></div>
     <div id="cursor-glow"></div>
+    <div id="scroll-progress"></div>
+    <button id="scroll-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
     <!-- NAV -->
     <div class="statusbar">
@@ -1294,6 +1678,28 @@
                 <a href="#education" data-target="education"><i class="fas fa-graduation-cap"></i> Education</a>
                 <a href="#contact" data-target="contact"><i class="fas fa-envelope"></i> Contact</a>
             </nav>
+        </div>
+    </div>
+
+    <!-- HUD TICKER -->
+    <div class="hud-ticker" aria-hidden="true">
+        <div class="hud-ticker-track">
+            <span>// SYSTEM STATUS: ONLINE</span>
+            <span>// UPTIME 99.9%</span>
+            <span>// ERP MIGRATION: COMPLETE</span>
+            <span>// API SYNC: ACTIVE</span>
+            <span>// MASTER DATA ACCURACY +30%</span>
+            <span>// RECONCILIATION TIME -50%</span>
+            <span>// Q-COMMERCE OPS: LIVE</span>
+            <span>// STATUS: OPEN TO RELOCATION</span>
+            <span>// SYSTEM STATUS: ONLINE</span>
+            <span>// UPTIME 99.9%</span>
+            <span>// ERP MIGRATION: COMPLETE</span>
+            <span>// API SYNC: ACTIVE</span>
+            <span>// MASTER DATA ACCURACY +30%</span>
+            <span>// RECONCILIATION TIME -50%</span>
+            <span>// Q-COMMERCE OPS: LIVE</span>
+            <span>// STATUS: OPEN TO RELOCATION</span>
         </div>
     </div>
 
@@ -1315,9 +1721,9 @@
                 <div class="role-line" id="roleLine"></div>
 
                 <p class="summary">
-                    <i class="fas fa-rocket"></i> I specialize in managing and optimizing enterprise systems to ensure accurate master data governance and smooth business operations. In my current role at Celeste Daily, I focus on improving ERP workflows, streamlining operational processes, and enhancing system efficiency across retail and digital platforms. My responsibilities include supporting system migrations, designing and mapping business processes, and conducting end-user training to ensure effective system adoption. I actively work with platforms such as Odoo and various POS systems, while also enabling API integrations that ensure real-time data synchronization between in-store and online operations.
+                    <i class="fas fa-rocket"></i> I build and safeguard the systems that keep retail running — ERP workflows, master data, and the APIs that tie it all together. At Celeste, that means leading ERP migrations end to end, mapping business processes, training teams through the transition, and keeping Odoo, POS platforms, and marketplace integrations talking to each other in real time.
                     <br><br>
-                    <i class="fas fa-graduation-cap"></i> Alongside my professional role, I am currently pursuing a Pearson BTEC Level 5 Higher National Diploma in Computing and progressing toward a Bachelor of Science (Hons) in Computing with London Metropolitan University (UK), further strengthening my technical expertise and academic foundation in the field. I am committed to building reliable, scalable, and efficient systems that support data-driven decision-making, operational continuity, and continuous process improvement.
+                    <i class="fas fa-graduation-cap"></i> Alongside that, I'm working through a Pearson BTEC Level 5 HND in Computing, on a path toward a BSc (Hons) in Computing with London Metropolitan University (UK) — building the formal foundation behind five years of hands-on systems work.
                 </p>
 
                 <div class="hero-actions">
@@ -1360,42 +1766,42 @@
                 <span class="idx"><i class="fas fa-gauge-high"></i> 01</span><h2>Live Metrics</h2><span class="rule"></span>
             </div>
             <div class="kpi-grid">
-                <div class="kpi-card reveal tilt" style="--accent:#00e5ff; --accent-shadow:rgba(0,229,255,0.35)">
+                <div class="kpi-card reveal tilt" style="--accent:#00fff2; --accent-shadow:rgba(0,255,242,0.35)">
                     <span class="kpi-icon"><i class="fas fa-server"></i></span>
                     <div class="label">System Uptime</div>
                     <div class="value" data-target="99.9" data-suffix="%">0%</div>
                     <div class="desc">Across 10+ retail outlets &amp; online platforms</div>
                     <div class="bar"><div class="bar-fill" data-fill="99.9"></div></div>
                 </div>
-                <div class="kpi-card reveal tilt" style="--accent:#a855f7; --accent-shadow:rgba(168,85,247,0.35)">
+                <div class="kpi-card reveal tilt" style="--accent:#b026ff; --accent-shadow:rgba(176,38,255,0.35)">
                     <span class="kpi-icon"><i class="fas fa-cloud-upload-alt"></i></span>
                     <div class="label">ERP Migration</div>
                     <div class="value" data-target="40" data-suffix="%">0%</div>
                     <div class="desc">Less downtime than planned, 100% user adoption</div>
                     <div class="bar"><div class="bar-fill" data-fill="40"></div></div>
                 </div>
-                <div class="kpi-card reveal tilt" style="--accent:#ff2e93; --accent-shadow:rgba(255,46,147,0.35)">
+                <div class="kpi-card reveal tilt" style="--accent:#ff2079; --accent-shadow:rgba(255,32,121,0.35)">
                     <span class="kpi-icon"><i class="fas fa-arrows-spin"></i></span>
                     <div class="label">Reconciliation Time</div>
                     <div class="value" data-target="50" data-suffix="%">0%</div>
                     <div class="desc">Reduced via Uber Eats, PickMe, myPOS, Odoo APIs</div>
                     <div class="bar"><div class="bar-fill" data-fill="50"></div></div>
                 </div>
-                <div class="kpi-card reveal tilt" style="--accent:#ffb020; --accent-shadow:rgba(255,176,32,0.35)">
+                <div class="kpi-card reveal tilt" style="--accent:#39ff14; --accent-shadow:rgba(57,255,20,0.35)">
                     <span class="kpi-icon"><i class="fas fa-bolt"></i></span>
                     <div class="label">Priority Issue Resolution</div>
                     <div class="value" data-target="95" data-suffix="%">0%</div>
                     <div class="desc">Resolved within 1–2 hours</div>
                     <div class="bar"><div class="bar-fill" data-fill="95"></div></div>
                 </div>
-                <div class="kpi-card reveal tilt" style="--accent:#00e5ff; --accent-shadow:rgba(0,229,255,0.35)">
+                <div class="kpi-card reveal tilt" style="--accent:#00fff2; --accent-shadow:rgba(0,255,242,0.35)">
                     <span class="kpi-icon"><i class="fas fa-coins"></i></span>
                     <div class="label">Rollout Budget</div>
                     <div class="value" data-target="10" data-suffix="%">0%</div>
                     <div class="desc">Under budget across 5+ outlet IT rollouts</div>
                     <div class="bar"><div class="bar-fill" data-fill="10"></div></div>
                 </div>
-                <div class="kpi-card reveal tilt" style="--accent:#a855f7; --accent-shadow:rgba(168,85,247,0.35)">
+                <div class="kpi-card reveal tilt" style="--accent:#b026ff; --accent-shadow:rgba(176,38,255,0.35)">
                     <span class="kpi-icon"><i class="fas fa-bullseye"></i></span>
                     <div class="label">Data Accuracy</div>
                     <div class="value" data-target="30" data-suffix="%">0%</div>
@@ -1415,7 +1821,7 @@
                     <div class="log-card">
                         <div class="log-meta"><span class="badge"><i class="fas fa-play"></i> CURRENT</span> March 2024 — Present</div>
                         <h3><i class="fas fa-user-tie"></i>Assistant Manager — Master Data &amp; IT</h3>
-                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <div class="company"><i class="fas fa-store"></i> Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
                         <ul>
                             <li>Orchestrated a seamless ERP migration with 40% less downtime than projected and 100% user adoption via structured enablement programs.</li>
                             <li>Deployed ERP modules automating 3+ critical workflows, boosting operational throughput by 25%.</li>
@@ -1433,7 +1839,7 @@
                     <div class="log-card">
                         <div class="log-meta">July 2022 — March 2024</div>
                         <h3><i class="fas fa-chart-line"></i>Senior Executive — Master Data &amp; IT</h3>
-                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <div class="company"><i class="fas fa-store"></i> Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
                         <ul>
                             <li>Harmonized master data across MyPOS, Uber Eats, and PickMe — achieving 100% pricing and inventory synchronization.</li>
                             <li>Orchestrated API-driven automation that eliminated 20+ hours of manual data processing weekly.</li>
@@ -1447,7 +1853,7 @@
                     <div class="log-card">
                         <div class="log-meta">February 2022 — June 2022</div>
                         <h3><i class="fas fa-handshake"></i>Junior Executive — Sales</h3>
-                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <div class="company"><i class="fas fa-store"></i> Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
                         <ul>
                             <li>Onboarded new product lines and suppliers to maintain seamless stock availability.</li>
                             <li>Ensured real-time inventory precision through proactive tracking and reconciliation.</li>
@@ -1460,7 +1866,7 @@
                     <div class="log-card">
                         <div class="log-meta">September 2021 — February 2022</div>
                         <h3><i class="fas fa-headset"></i>Customer Care Officer</h3>
-                        <div class="company"><i class="fas fa-store"></i> Celeste Daily by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
+                        <div class="company"><i class="fas fa-store"></i> Celeste by Jaysons Retail Pvt Ltd · Colombo, Sri Lanka</div>
                         <ul>
                             <li>Served as primary customer contact, translating feedback into operational enhancements.</li>
                             <li>Managed end-to-end order fulfillment follow-up and resolution.</li>
@@ -1486,7 +1892,7 @@
             <div class="proj-grid">
                 <div class="proj-card reveal">
                     <h3><i class="fas fa-cloud-upload-alt"></i>Celeste Digital Transformation</h3>
-                    <div class="proj-sub"><i class="fas fa-building"></i> Celeste Daily · Odoo.sh Cloud Migration</div>
+                    <div class="proj-sub"><i class="fas fa-building"></i> Celeste · Odoo.sh Cloud Migration</div>
                     <ul>
                         <li>Led the complete digital transformation from on-premise infrastructure to Odoo.sh cloud ecosystem.</li>
                         <li>Drove strategic planning, budgeting, and technology partner selection.</li>
@@ -1498,7 +1904,7 @@
                 </div>
                 <div class="proj-card reveal">
                     <h3><i class="fas fa-cart-plus"></i>Custom Order Manager – OMAK</h3>
-                    <div class="proj-sub"><i class="fas fa-building"></i> Celeste Daily · OMAK Technologies</div>
+                    <div class="proj-sub"><i class="fas fa-building"></i> Celeste · OMAK Technologies</div>
                     <ul>
                         <li>Conceptualized and led the development of a bespoke Order Manager to replace legacy systems.</li>
                         <li>Actively involved throughout the full lifecycle — from planning and testing to rollout.</li>
@@ -1588,14 +1994,14 @@
                     <div class="rec-author"><i class="fas fa-user-circle"></i>Enosh Tharinda Gunathilaka</div>
                     <div class="rec-title"><i class="fas fa-briefcase"></i> Ex-Uber Account Manager</div>
                     <div class="rec-text">
-                        Working with Fazlan during my tenure managing the UberEats account for Celeste Daily was a seamless experience. He was consistently approachable, responsive, and proactive — qualities that made collaboration effortless. Managing a dynamic online grocery operation required constant attention to pricing, promotions, and operational adjustments, and Fazlan handled every request with precision and speed. His reliability and positive energy were instrumental in supporting Celeste's growth on the platform. Fazlan is a hardworking, supportive professional who would be an asset to any team.
+                        Working with Fazlan during my tenure managing the UberEats account for Celeste was a seamless experience. He was consistently approachable, responsive, and proactive — qualities that made collaboration effortless. Managing a dynamic online grocery operation required constant attention to pricing, promotions, and operational adjustments, and Fazlan handled every request with precision and speed. His reliability and positive energy were instrumental in supporting Celeste's growth on the platform. Fazlan is a hardworking, supportive professional who would be an asset to any team.
                     </div>
                 </div>
                 <div class="rec-card reveal">
                     <div class="rec-author"><i class="fas fa-user-circle"></i>Suranga Ranatunga</div>
                     <div class="rec-title"><i class="fas fa-briefcase"></i> Founder/Managing Director, myPOS Software Solutions</div>
                     <div class="rec-text">
-                        I've had the privilege of collaborating with Fazlan Fairooz in his role as Assistant Manager - Master Data &amp; IT at Celeste Daily. Throughout our engagement, Fazlan demonstrated exceptional professionalism, integrity, and commitment. He serves as a vital bridge between business requirements and technical execution, always arriving prepared with a detail-oriented and proactive mindset. His deep grasp of data systems and clear communication style made every interaction efficient and productive. What truly sets Fazlan apart is his calm, solutions-driven approach under pressure. He's a professional who not only understands the technical landscape but also values long-term partnerships. Highly recommended for any organization seeking reliability, professionalism, and collaborative leadership.
+                        I've had the privilege of collaborating with Fazlan Fairooz in his role as Assistant Manager - Master Data &amp; IT at Celeste. Throughout our engagement, Fazlan demonstrated exceptional professionalism, integrity, and commitment. He serves as a vital bridge between business requirements and technical execution, always arriving prepared with a detail-oriented and proactive mindset. His deep grasp of data systems and clear communication style made every interaction efficient and productive. What truly sets Fazlan apart is his calm, solutions-driven approach under pressure. He's a professional who not only understands the technical landscape but also values long-term partnerships. Highly recommended for any organization seeking reliability, professionalism, and collaborative leadership.
                     </div>
                 </div>
             </div>
@@ -1664,7 +2070,7 @@
         <section id="contact">
             <div class="contact-card reveal">
                 <h2><i class="fas fa-handshake"></i>Let's build something reliable.</h2>
-                <p>Open to Business Operations, Project Management, IT Manager, E-Commerce Manager, Key Account Manager, split-shift friendly, and open to employer-sponsored relocation.</p>
+                <p>Open to Business Operations, Project Management, IT Management, E-Commerce, and Key Account roles — remote-first or split-shift friendly, with openness to employer-sponsored relocation.</p>
                 <div class="contact-links">
                     <a class="btn btn-primary" href="mailto:fazlanfairooz20@gmail.com"><i class="fas fa-envelope"></i> fazlanfairooz20@gmail.com</a>
                     <a class="btn btn-ghost" href="https://linkedin.com/in/fazlanfairooz" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> linkedin.com/in/fazlanfairooz</a>
@@ -1722,7 +2128,7 @@
             const canvas = document.getElementById('netbg');
             const ctx = canvas.getContext('2d');
             let w, h, nodes = [];
-            const colors = ['0,229,255', '168,85,247', '255,46,147'];
+            const colors = ['5, 217, 232', '157, 78, 221', '255, 42, 109'];
             const NODE_COUNT_DESKTOP = 60;
             const NODE_COUNT_MOBILE = 28;
             const MAX_DIST = 130;
@@ -1819,6 +2225,39 @@
             });
         }
 
+        // ---- scroll progress bar ----
+        const progressBar = document.getElementById('scroll-progress');
+        const scrollTopBtn = document.getElementById('scroll-top');
+        function updateScrollUI() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            if (progressBar) progressBar.style.width = pct + '%';
+            if (scrollTopBtn) scrollTopBtn.classList.toggle('visible', scrollTop > 600);
+        }
+        window.addEventListener('scroll', updateScrollUI, { passive: true });
+        updateScrollUI();
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+            });
+        }
+
+        // ---- magnetic buttons ----
+        if (!isCoarse && !reducedMotion) {
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.18}px, ${y * 0.35}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0,0)';
+                });
+            });
+        }
+
         // ---- typewriter ----
         const roles = [
             "ERP Migration Lead",
@@ -1879,9 +2318,9 @@
 
                 // Glow layers
                 const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR);
-                grad.addColorStop(0, 'rgba(0, 229, 255, 0.04)');
-                grad.addColorStop(0.5, 'rgba(168, 85, 247, 0.06)');
-                grad.addColorStop(1, 'rgba(255, 46, 147, 0.02)');
+                grad.addColorStop(0, 'rgba(5, 217, 232, 0.04)');
+                grad.addColorStop(0.5, 'rgba(157, 78, 221, 0.06)');
+                grad.addColorStop(1, 'rgba(255, 42, 109, 0.02)');
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, w, h);
 
@@ -1927,10 +2366,10 @@
                     else ctx.lineTo(x, y);
                 }
                 ctx.closePath();
-                ctx.strokeStyle = `rgba(0, 229, 255, ${0.2 + 0.1 * Math.sin(time * 0.005)})`;
+                ctx.strokeStyle = `rgba(5, 217, 232, ${0.2 + 0.1 * Math.sin(time * 0.005)})`;
                 ctx.lineWidth = 1.5;
                 ctx.shadowBlur = 20;
-                ctx.shadowColor = 'rgba(0, 229, 255, 0.2)';
+                ctx.shadowColor = 'rgba(5, 217, 232, 0.2)';
                 ctx.stroke();
 
                 // Outer ring with dots
@@ -1944,9 +2383,9 @@
                     ctx.beginPath();
                     ctx.arc(x, y, size, 0, Math.PI * 2);
                     const dotAlpha = 0.2 + 0.3 * Math.sin(i * 0.7 + time * 0.008);
-                    ctx.fillStyle = `rgba(168, 85, 247, ${dotAlpha})`;
+                    ctx.fillStyle = `rgba(157, 78, 221, ${dotAlpha})`;
                     ctx.shadowBlur = 12;
-                    ctx.shadowColor = 'rgba(168, 85, 247, 0.3)';
+                    ctx.shadowColor = 'rgba(157, 78, 221, 0.3)';
                     ctx.fill();
                 }
 
@@ -1964,15 +2403,15 @@
                     ctx.beginPath();
                     ctx.moveTo(x1, y1);
                     ctx.lineTo(x2, y2);
-                    ctx.strokeStyle = `rgba(255, 46, 147, ${0.05 + 0.05 * Math.sin(i + time * 0.005)})`;
+                    ctx.strokeStyle = `rgba(255, 42, 109, ${0.05 + 0.05 * Math.sin(i + time * 0.005)})`;
                     ctx.lineWidth = 0.8;
                     ctx.stroke();
                 }
 
                 // Center glow
                 const centerGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR * 0.15);
-                centerGrad.addColorStop(0, 'rgba(0, 229, 255, 0.15)');
-                centerGrad.addColorStop(1, 'rgba(0, 229, 255, 0)');
+                centerGrad.addColorStop(0, 'rgba(5, 217, 232, 0.15)');
+                centerGrad.addColorStop(1, 'rgba(5, 217, 232, 0)');
                 ctx.fillStyle = centerGrad;
                 ctx.fillRect(0, 0, w, h);
 
