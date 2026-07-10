@@ -213,6 +213,119 @@
             box-shadow: 0 0 8px var(--cyan);
         }
 
+        /* ---- mobile hamburger toggle (HUD style) ---- */
+        #navToggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 0;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+            border: 1px solid var(--border-glass);
+            background: rgba(0, 255, 242, 0.03);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        @media (min-width: 720px) {
+            #navToggle { display: none; }
+        }
+        #navToggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--cyan);
+            box-shadow: 0 0 6px rgba(0, 255, 242, 0.6);
+            transition: transform 0.25s ease, opacity 0.2s ease;
+        }
+        #navToggle[aria-expanded="true"] {
+            border-color: var(--cyan);
+            box-shadow: 0 0 12px rgba(0, 255, 242, 0.4);
+        }
+        #navToggle[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        #navToggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+        #navToggle[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ---- mobile nav drawer (HUD panel style) ---- */
+        #mobileNavOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 3, 5, 0.75);
+            backdrop-filter: blur(2px);
+            z-index: 149;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        #mobileNavOverlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #mobileNav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(78vw, 320px);
+            background: var(--glass-strong);
+            border-left: 1px solid var(--cyan);
+            box-shadow: -6px 0 40px -10px rgba(0, 255, 242, 0.25);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            padding: 84px 8px 24px;
+            gap: 4px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+        #mobileNav.open {
+            transform: translateX(0);
+        }
+        #mobileNav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: 0;
+            clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+            border: 1px solid transparent;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            letter-spacing: 0.04em;
+            min-height: 44px;
+        }
+        #mobileNav a i {
+            width: 18px;
+            color: var(--cyan);
+            font-size: 13px;
+            text-shadow: 0 0 6px rgba(0, 255, 242, 0.5);
+        }
+        #mobileNav a:active,
+        #mobileNav a.active {
+            background: rgba(0, 255, 242, 0.06);
+            border-color: rgba(0, 255, 242, 0.35);
+            color: var(--text);
+            text-shadow: 0 0 6px rgba(0, 255, 242, 0.4);
+        }
+        @media (min-width: 720px) {
+            #mobileNavOverlay, #mobileNav { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #mobileNav, #mobileNavOverlay { transition: none; }
+        }
+
         /* ----- hero console with split layout ----- */
         .hero {
             padding: 60px 0 40px;
@@ -664,6 +777,45 @@
             }
             .hero h1 {
                 font-size: 2.2rem;
+            }
+        }
+
+        /* ----- general mobile tightening (all phones/small tablets) ----- */
+        @media (max-width: 719px) {
+            section {
+                padding: 40px 0;
+            }
+            .section-head {
+                margin-bottom: 22px;
+            }
+            .section-head h2 {
+                font-size: 1.35rem;
+            }
+            .kpi-card {
+                padding: 18px 18px 20px;
+            }
+            .kpi-card .value {
+                font-size: 1.9rem;
+            }
+            .log-card, .proj-card, .rec-card, .skill-group {
+                padding: 18px 18px;
+            }
+            .contact-card {
+                padding: 32px 20px;
+            }
+            .contact-card h2 {
+                font-size: 1.5rem;
+            }
+            .hero-actions .btn {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+            .btn {
+                min-height: 44px;
+            }
+            .hud-ticker-track span {
+                padding: 7px 16px;
+                font-size: 10px;
             }
         }
 
@@ -1678,8 +1830,23 @@
                 <a href="#education" data-target="education"><i class="fas fa-graduation-cap"></i> Education</a>
                 <a href="#contact" data-target="contact"><i class="fas fa-envelope"></i> Contact</a>
             </nav>
+            <button id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
+
+    <!-- MOBILE NAV DRAWER -->
+    <div id="mobileNavOverlay"></div>
+    <nav id="mobileNav" aria-label="Mobile navigation">
+        <a href="#metrics" data-target="metrics"><i class="fas fa-chart-simple"></i> Overview</a>
+        <a href="#experience" data-target="experience"><i class="fas fa-briefcase"></i> Experience</a>
+        <a href="#projects" data-target="projects"><i class="fas fa-code"></i> Projects</a>
+        <a href="#skills" data-target="skills"><i class="fas fa-cogs"></i> Skills</a>
+        <a href="#recommendations" data-target="recommendations"><i class="fas fa-quote-left"></i> Recommendations</a>
+        <a href="#education" data-target="education"><i class="fas fa-graduation-cap"></i> Education</a>
+        <a href="#contact" data-target="contact"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
 
     <!-- HUD TICKER -->
     <div class="hud-ticker" aria-hidden="true">
@@ -2463,20 +2630,54 @@
             }, { threshold: 0.25 });
             document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-            // ---- nav highlight ----
-            const navLinks = document.querySelectorAll('#mainNav a');
-            const sections = Array.from(navLinks).map(a => document.getElementById(a.dataset.target)).filter(Boolean);
+            // ---- nav highlight (desktop + mobile drawer) ----
+            const navLinks = document.querySelectorAll('#mainNav a, #mobileNav a');
+            const sections = Array.from(document.querySelectorAll('#mainNav a'))
+                .map(a => document.getElementById(a.dataset.target)).filter(Boolean);
             const navIo = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    const link = document.querySelector(`#mainNav a[data-target="${entry.target.id}"]`);
-                    if (!link) return;
                     if (entry.isIntersecting) {
                         navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
+                        document.querySelectorAll(`a[data-target="${entry.target.id}"]`).forEach(l => l.classList.add('active'));
                     }
                 });
             }, { threshold: 0.35, rootMargin: '-80px 0px -40% 0px' });
             sections.forEach(s => navIo.observe(s));
+        })();
+
+        // ---- mobile nav drawer ----
+        (function() {
+            const toggle = document.getElementById('navToggle');
+            const drawer = document.getElementById('mobileNav');
+            const overlay = document.getElementById('mobileNavOverlay');
+            if (!toggle || !drawer || !overlay) return;
+
+            function openMenu() {
+                drawer.classList.add('open');
+                overlay.classList.add('open');
+                toggle.setAttribute('aria-expanded', 'true');
+                toggle.setAttribute('aria-label', 'Close menu');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                drawer.classList.remove('open');
+                overlay.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.setAttribute('aria-label', 'Open menu');
+                document.body.style.overflow = '';
+            }
+            toggle.addEventListener('click', () => {
+                if (drawer.classList.contains('open')) closeMenu();
+                else openMenu();
+            });
+            overlay.addEventListener('click', closeMenu);
+            drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeMenu();
+            });
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 720) closeMenu();
+            });
         })();
     </script>
 </body>
